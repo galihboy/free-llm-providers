@@ -64,7 +64,15 @@ def smoke_one(provider_name, provider_cfg, fmt_name, fmt_cfg, prompt):
 def main():
     parser = argparse.ArgumentParser(description="Smoke test semua provider")
     parser.add_argument("--prompt", default="say OK", help="Prompt tes pendek")
+    parser.add_argument(
+        "--skip",
+        default=os.getenv("SMOKE_SKIP", ""),
+        help="Daftar provider (dipisah koma) yang di-skip. "
+             "Berguna di CI kalau IP runner diblokir upstream (mis. AgentRouter).",
+    )
     args = parser.parse_args()
+
+    skip = {s.strip() for s in args.skip.split(",") if s.strip()}
 
     providers_dir = os.path.join(ROOT, "providers")
     results = []
@@ -77,7 +85,10 @@ def main():
             pcfg = yaml.safe_load(f)
 
         for fmt_name, fmt_cfg in pcfg.get("formats", {}).items():
-            r = smoke_one(pname, pcfg, fmt_name, fmt_cfg, args.prompt)
+            if pname in skip:
+                r = {"status": "SKIP", "detail": "skipped (SMOKE_SKIP)"}
+            else:
+                r = smoke_one(pname, pcfg, fmt_name, fmt_cfg, args.prompt)
             r.update({"provider": pname, "format": fmt_name})
             results.append(r)
             icon = {"OK": "✅", "FAIL": "❌", "SKIP": "⏭️"}.get(r["status"], "?")
