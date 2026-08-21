@@ -1,0 +1,59 @@
+# AgentRouter — provider dengan 2 format API (Anthropic + OpenAI)
+# Docs: https://agentrouter.org/docs/
+name: AgentRouter
+url: https://agentrouter.org
+free_quota: "credit awal $150-200"
+status: aktif
+standalone_docs: providers/agentrouter/README.md
+
+formats:
+  # Format Anthropic Messages — untuk model Claude
+  anthropic_messages:
+    base_url: https://agentrouter.org      # TANPA /v1
+    endpoint: /v1/messages
+    key_env: AGENTROUTER_API_KEY
+    models: [claude-opus-4-8, claude-opus-5, gpt-5.6-sol]
+    extra_headers:                          # fingerprint client WAJIB, kalau tidak 401
+      user-agent: "claude-cli/2.1.195 (external, sdk-cli)"
+      x-app: cli
+      x-stainless-package-version: "0.0.0"
+      x-stainless-runtime: python
+      x-stainless-os: windows
+    moderation:
+      # Anchor utk lolos moderasi bahasa. Pilihan (prioritas turun):
+      #   anchor_text: "teks bebas"  -> override penuh
+      #   anchor_file: custom_chat   -> file anchors/custom_chat.yaml
+      #   english_anchor: true       -> varian "general" (netral, default)
+      #   english_anchor: coding     -> varian bawaan ATAU nama file anchors/*.yaml
+      # Override sementara dari CLI: python run.py --anchor extraction ...
+      # Daftar semua anchor: python run.py --list-anchors
+      english_anchor: true                  # prompt non-Inggris kena content-blocked
+    list_models:
+      endpoint: /v1/models
+      method: GET
+
+  # Format OpenAI Chat Completions — untuk model GPT
+  openai_chat:
+    base_url: https://agentrouter.org/v1
+    endpoint: /chat/completions
+    key_env: AGENTROUTER_API_KEY            # key lama bisa semua model
+    key_env_alt: AGENTROUTER_API_KEY_OPENAI # key baru hanya gpt-5.6-sol
+    models: [gpt-5.6-sol]
+    extra_headers:                          # fingerprint client WAJIB juga di sini
+      user-agent: "claude-cli/2.1.195 (external, sdk-cli)"
+      x-app: cli
+      x-stainless-package-version: "0.0.0"
+      x-stainless-runtime: python
+      x-stainless-os: windows
+    moderation:
+      english_anchor: true
+    list_models:
+      endpoint: /models
+      method: GET
+
+gotcha:
+  - "401 'unauthorized client detected' = fingerprint header kurang, BUKAN key salah"
+  - "403 = key valid tapi model tidak diizinkan untuk key tersebut"
+  - "prompt non-Inggris -> 400 content-blocked; solusinya ENGLISH_ANCHOR"
+  - "key lama (AGENTROUTER_API_KEY) bisa semua model di kedua endpoint; key baru hanya gpt-5.6-sol"
+  - "model claude-opus-4-6/4-7 sudah dihapus per 2026-08-20"

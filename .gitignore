@@ -1,0 +1,21 @@
+# Secrets — JANGAN commit API key
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Output tes
+smoke_result*.json
+*.log

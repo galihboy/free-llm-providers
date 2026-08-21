@@ -1,0 +1,23 @@
+# Groq — contoh provider STANDAR: tanpa extra_headers, tanpa anchor
+# Docs: https://console.groq.com
+name: Groq
+url: https://console.groq.com
+free_quota: "free tier dengan rate limit harian"
+status: aktif
+standalone_docs: providers/groq/README.md
+
+formats:
+  openai_chat:
+    base_url: https://api.groq.com/openai/v1
+    endpoint: /chat/completions
+    key_env: GROQ_API_KEY
+    # Model chat per 2026-08-20 (daftar bisa berubah; cek --list-models)
+    models: [openai/gpt-oss-120b, openai/gpt-oss-20b, qwen/qwen3.6-27b, groq/compound-mini, allam-2-7b]
+    # extra_headers: tidak ada -> header standar saja
+    # moderation: tidak ada -> prompt dikirim apa adanya
+    list_models:
+      endpoint: /models
+      method: GET
+
+gotcha:
+  - "rate limit harian untuk free tier; model tertentu bisa berganti"
