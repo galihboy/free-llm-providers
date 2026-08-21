@@ -51,9 +51,12 @@ from formats.base import (  # noqa: E402
     ANCHORS,
     ANCHOR_ACK,
     build_headers,
+    force_ipv4_only,
     get_api_key,
     load_anchor_file,
 )
+
+force_ipv4_only()  # cegah timeout IPv6 ke upstream (mis. AgentRouter)
 
 load_dotenv(dotenv_path=os.path.join(ROOT, ".env"))
 

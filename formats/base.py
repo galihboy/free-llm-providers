@@ -9,9 +9,31 @@ Semua field opsional di YAML ditangani di sini:
 """
 
 import os
+import socket
 
 import requests
 import yaml
+
+# Force IPv4 — beberapa provider (mis. AgentRouter di Alibaba Cloud SG) me-return
+# AAAA record tapi IPv6 tidak reachable dari client tertentu -> timeout hang.
+# Monkey-patch getaddrinfo agar hanya ambil AF_INET. Idempoten (aman dipanggil
+# berkali-kali). Pola ini sama dengan fix timeout urllib di tools scratch Cavoti.
+_original_getaddrinfo = socket.getaddrinfo
+_IPV4_FORCED = False
+
+
+def force_ipv4_only():
+    global _IPV4_FORCED
+    if _IPV4_FORCED:
+        return
+    socket.getaddrinfo = lambda host, port, *a, **k: [
+        r for r in _original_getaddrinfo(host, port, *a, **k)
+        if r[0] == socket.AF_INET
+    ]
+    _IPV4_FORCED = True
+
+
+force_ipv4_only()
 
 # Anchor bahasa Inggris untuk provider dengan moderasi bahasa (misal AgentRouter).
 # Prompt non-Inggris bisa kena "content-blocked" tanpa anchor ini.
