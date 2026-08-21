@@ -1,5 +1,8 @@
 # Free LLM Providers 🆓
 
+[![Smoke Test](https://github.com/galihboy/free-llm-providers/actions/workflows/smoke.yml/badge.svg)](https://github.com/galihboy/free-llm-providers/actions/workflows/smoke.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 > Dibuat oleh **Galih Hermawan** ([galih.eu](https://galih.eu)). Lisensi MIT — bebas dipakai & dimodifikasi.
 
 Kurasi provider LLM **gratis** (atau free credit) yang sudah **dites langsung**, lengkap dengan contoh pemakaian dan integrasi ke tools coding (VS Code Copilot, OpenCode, Claude Code, Codex, dll).

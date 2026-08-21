@@ -1,0 +1,48 @@
+name: Smoke Test Providers
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Tiap hari 00:00 UTC — deteksi provider mati / model berganti otomatis
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Write .env from secrets
+        # API key diinjeksi dari GitHub Secrets (ENCRYPTED) — tidak pernah di-commit
+        run: |
+          cat > .env <<'EOF'
+          AGENTROUTER_API_KEY=${{ secrets.AGENTROUTER_API_KEY }}
+          AGENTROUTER_API_KEY_OPENAI=${{ secrets.AGENTROUTER_API_KEY_OPENAI }}
+          GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
+          EOF
+        shell: bash
+
+      - name: Run smoke test
+        # Lanjut meski ada FAIL (biar artifact tetap ke-upload & badge merah)
+        run: python tools/smoke_test_all.py --prompt "say OK" || true
+
+      - name: Upload smoke_result.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-result
+          path: smoke_result.json
+          if-no-files-found: warn
