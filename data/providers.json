@@ -18,8 +18,8 @@
       "free_quota": "free tier, rate limit harian",
       "status": "aktif",
       "formats": ["openai_chat"],
-      "models": ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.6-27b", "groq/compound-mini"],
-      "notes": "Provider standar tanpa keistimewaan; inferensi sangat cepat; daftar model sering berubah"
+      "models": ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.6-27b", "groq/compound-mini", "allam-2-7b"],
+      "notes": "Provider standar tanpa keistimewaan; inferensi sangat cepat; daftar model sering berubah (cek --list-models)"
     }
   ]
 }
