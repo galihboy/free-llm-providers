@@ -39,7 +39,11 @@ def smoke_one(provider_name, provider_cfg, fmt_name, fmt_cfg, prompt):
     if not models:
         return {"status": "FAIL", "detail": "no models"}
 
-    model = models[0]
+    # Prioritaskan model yang sudah dikurasi di YAML (models[0]); list live bisa
+    # berisi model aneh/butuh terms di posisi pertama (mis. Groq). Fallback ke
+    # live kalau YAML kosong.
+    yaml_models = fmt_cfg.get("models") or []
+    model = yaml_models[0] if yaml_models else models[0]
     if fmt_name not in FORMAT_CLIENTS:
         return {"status": "SKIP", "detail": f"format {fmt_name} belum diimplementasikan"}
 
