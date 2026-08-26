@@ -18,15 +18,19 @@
 
 > 💡 **Referral disclosure**: tautan "Daftar (referral)" di atas adalah link afiliasi. Jika kamu mendaftar lewat sana, penulis mendapat reward **$150** dan kamu dapat **$50** (tanpa biaya ekstra). Reward ditransfer ke saldo akun via fitur *transfer*. Mau netral? Pakai https://agentrouter.org/register.
 
-## Model Tersedia (per 2026-08-20)
+## Model Tersedia (per 2026-08-27)
 
-| Model | Format | Catatan |
-|---|---|---|
-| `claude-opus-5` | Anthropic | |
-| `claude-opus-4-8` | Anthropic | |
-| `gpt-5.6-sol` | OpenAI + Anthropic | bisa lewat kedua endpoint |
+| Model | Format | Vision | Tool Calling | Max Input | Max Output | Catatan |
+|---|---|---|---|---|---|---|
+| `claude-opus-5` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | |
+| `claude-opus-4-8` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | |
+| `gpt-5.6-sol` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | bisa lewat kedua endpoint |
+| `glm-5.3` | Anthropic + OpenAI | ❌ | ✅ | 1.048.576 | 131.072 | baru per 2026-08-27 |
+| `deepseek-v4-flash` | Anthropic + OpenAI | ❌ | ✅ | 1.048.576 | 393.216 | baru per 2026-08-27; butuh `-t ≥1024` |
 
 > ⚠️ `claude-opus-4-6` dan `claude-opus-4-7` sudah **dihapus** dari AgentRouter.
+> ⚠️ `deepseek-v4-flash` adalah model reasoning: `max_tokens` kecil (mis. 32) membuat jawaban kosong karena token habis untuk reasoning — pakai `-t 1024` atau lebih.
+> ℹ️ Spek token/vision/tool-calling disinkronkan dari konfigurasi VS Code Copilot yang teruji (`chatLanguageModels.json`).
 
 ## Dua Endpoint
 

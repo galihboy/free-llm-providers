@@ -3,6 +3,22 @@
 Semua perubahan penting pada proyek ini dicatat di sini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
+## [0.5.0] - 2026-08-27
+
+### Ditambahkan
+- **2 model baru AgentRouter**: `glm-5.3` (1M input / 128K output) dan `deepseek-v4-flash` (1M input / 384K output) — tersedia di kedua endpoint (Anthropic + OpenAI), tool calling ✅, vision ❌.
+- `providers/agentrouter.yaml`: kedua model ditambahkan ke `models:` format `anthropic_messages` dan `openai_chat` + gotcha baru.
+- `providers/agentrouter/README.md`: tabel model kini memuat kolom Vision, Tool Calling, Max Input, Max Output (disinkronkan dari konfigurasi VS Code Copilot teruji).
+- `integrations/vscode-copilot.md`: contoh entri `chatLanguageModels.json` diperbarui ke 5 model dengan spek token terbaru.
+
+### Diubah
+- Spek token model lama diperbarui sesuai konfigurasi teruji: `claude-opus-5`, `claude-opus-4-8`, `gpt-5.6-sol` kini 1M input / 128K output, vision ✅ ketiganya.
+
+### Hasil Tes
+- ✅ `--list-models` [LIVE] kedua endpoint: 5 model (claude-opus-4-8, claude-opus-5, deepseek-v4-flash, glm-5.3, gpt-5.6-sol)
+- ✅ `glm-5.3` via openai_chat: 2171 ms, 98 token total
+- ✅ `deepseek-v4-flash` via openai_chat (`-t 1024`): 1771 ms; dengan `-t 32` jawaban kosong (token habis untuk reasoning)
+
 ## [0.4.1] - 2026-08-20
 
 ### Ditambahkan

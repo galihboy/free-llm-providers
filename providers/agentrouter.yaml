@@ -7,12 +7,12 @@ status: aktif
 standalone_docs: providers/agentrouter/README.md
 
 formats:
-  # Format Anthropic Messages — untuk model Claude
+  # Format Anthropic Messages — Claude + model lain (glm, deepseek)
   anthropic_messages:
     base_url: https://agentrouter.org      # TANPA /v1
     endpoint: /v1/messages
     key_env: AGENTROUTER_API_KEY
-    models: [claude-opus-4-8, claude-opus-5, gpt-5.6-sol]
+    models: [claude-opus-4-8, claude-opus-5, gpt-5.6-sol, glm-5.3, deepseek-v4-flash]
     extra_headers:                          # fingerprint client WAJIB, kalau tidak 401
       user-agent: "claude-cli/2.1.195 (external, sdk-cli)"
       x-app: cli
@@ -38,7 +38,7 @@ formats:
     endpoint: /chat/completions
     key_env: AGENTROUTER_API_KEY            # key lama bisa semua model
     key_env_alt: AGENTROUTER_API_KEY_OPENAI # key baru hanya gpt-5.6-sol
-    models: [gpt-5.6-sol]
+    models: [gpt-5.6-sol, glm-5.3, deepseek-v4-flash]
     extra_headers:                          # fingerprint client WAJIB juga di sini
       user-agent: "claude-cli/2.1.195 (external, sdk-cli)"
       x-app: cli
@@ -57,3 +57,5 @@ gotcha:
   - "prompt non-Inggris -> 400 content-blocked; solusinya ENGLISH_ANCHOR"
   - "key lama (AGENTROUTER_API_KEY) bisa semua model di kedua endpoint; key baru hanya gpt-5.6-sol"
   - "model claude-opus-4-6/4-7 sudah dihapus per 2026-08-20"
+  - "glm-5.3 & deepseek-v4-flash (baru per 2026-08-27): tersedia di kedua endpoint, tool calling OK, tanpa vision"
+  - "deepseek-v4-flash = model reasoning: max_tokens kecil (mis. 32) -> jawaban kosong; pakai >= 1024"

@@ -66,7 +66,7 @@ Lalu di VS Code, ada **2 cara** mendaftarkan model:
 2. Group name: `AgentRouter (Proxy)`, API Key: isi apa saja (key asli dibaca proxy dari `.env`).
 3. API format: **OpenAI Chat Completions**.
 4. Base URL: `http://localhost:5099/v1`
-5. Model ID: `claude-opus-5`, `claude-opus-4-8`, atau `gpt-5.6-sol`.
+5. Model ID: `claude-opus-5`, `claude-opus-4-8`, `gpt-5.6-sol`, `glm-5.3`, atau `deepseek-v4-flash`.
 6. Tes: kirim "hanya balas OK".
 
 #### Cara B: Edit `chatLanguageModels.json` langsung (semua model sekaligus)
@@ -85,9 +85,9 @@ File lokasi: `%APPDATA%\Code\User\chatLanguageModels.json` (Windows) atau `~/.co
       "name": "AR claude-opus-5",
       "url": "http://localhost:5099",
       "toolCalling": true,
-      "vision": false,
-      "maxInputTokens": 256000,
-      "maxOutputTokens": 16000
+      "vision": true,
+      "maxInputTokens": 1000000,
+      "maxOutputTokens": 128000
     },
     {
       "id": "claude-opus-4-8",
@@ -95,17 +95,35 @@ File lokasi: `%APPDATA%\Code\User\chatLanguageModels.json` (Windows) atau `~/.co
       "url": "http://localhost:5099",
       "toolCalling": true,
       "vision": true,
-      "maxInputTokens": 200000,
-      "maxOutputTokens": 4096
+      "maxInputTokens": 1000000,
+      "maxOutputTokens": 128000
     },
     {
       "id": "gpt-5.6-sol",
       "name": "AR GPT-5.6 Sol",
       "url": "http://localhost:5099",
       "toolCalling": true,
+      "vision": true,
+      "maxInputTokens": 1000000,
+      "maxOutputTokens": 128000
+    },
+    {
+      "id": "glm-5.3",
+      "name": "AR glm-5.3",
+      "url": "http://localhost:5099",
+      "toolCalling": true,
       "vision": false,
-      "maxInputTokens": 128000,
-      "maxOutputTokens": 16000
+      "maxInputTokens": 1048576,
+      "maxOutputTokens": 131072
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "AR deepseek-v4-flash",
+      "url": "http://localhost:5099",
+      "toolCalling": true,
+      "vision": false,
+      "maxInputTokens": 1048576,
+      "maxOutputTokens": 393216
     }
   ]
 }
