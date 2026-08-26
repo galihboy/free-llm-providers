@@ -3,20 +3,18 @@
 > 🔄 Standalone script: sinkron dengan `formats/` per 2026-08-20
 > ℹ️ Provider ini juga tersedia via framework: `python run.py --provider agentrouter`
 
-**AgentRouter** (https://agentrouter.org) adalah router LLM gratis dengan credit awal **$150-200**. Unik karena mendukung **2 format API sekaligus**: Anthropic Messages dan OpenAI Chat Completions.
+**AgentRouter** (https://agentrouter.org/register?aff=8NFb) adalah router LLM gratis dengan credit awal **$150-200**. Unik karena mendukung **2 format API sekaligus**: Anthropic Messages dan OpenAI Chat Completions.
 
 ## Info Dasar
 
 | | |
 |---|---|
-| Website | https://agentrouter.org |
-| Daftar | https://agentrouter.org/register |
-| Daftar (referral) | https://agentrouter.org/register?aff=8NFb |
-| Ambil API key | https://agentrouter.org/console/token |
+| Website / Daftar | https://agentrouter.org/register?aff=8NFb |
+| Ambil API key | https://agentrouter.org/console/token?aff=8NFb |
 | Kuota gratis | credit awal $150-200 |
-| Docs | https://agentrouter.org/docs/ |
+| Docs | https://agentrouter.org/docs/?aff=8NFb |
 
-> 💡 **Referral disclosure**: tautan "Daftar (referral)" di atas adalah link afiliasi. Jika kamu mendaftar lewat sana, penulis mendapat reward **$150** dan kamu dapat **$50** (tanpa biaya ekstra). Reward ditransfer ke saldo akun via fitur *transfer*. Mau netral? Pakai https://agentrouter.org/register.
+> 💡 **Referral disclosure**: semua tautan AgentRouter di dokumen ini adalah link afiliasi (referral). Jika kamu mendaftar lewat sana, penulis mendapat reward **$150** dan kamu dapat **$50** (tanpa biaya ekstra). Reward ditransfer ke saldo akun via fitur *transfer*. Mau netral? Pakai https://agentrouter.org/register.
 
 ## Model Tersedia (per 2026-08-27)
 

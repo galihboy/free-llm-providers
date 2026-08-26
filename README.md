@@ -30,7 +30,7 @@ Kurasi provider LLM **gratis** (atau free credit) yang sudah **dites langsung**,
 
 | Provider | Kuota Gratis | Model | Format API | Status | Panduan |
 |---|---|---|---|---|---|
-| [AgentRouter](https://agentrouter.org) | credit $150-200 | claude-opus-5, claude-opus-4-8, gpt-5.6-sol, glm-5.3, deepseek-v4-flash | Anthropic + OpenAI | ✅ Aktif | [📖 providers/agentrouter](providers/agentrouter/) |
+| [AgentRouter](https://agentrouter.org/register?aff=8NFb) | credit $150-200 | claude-opus-5, claude-opus-4-8, gpt-5.6-sol, glm-5.3, deepseek-v4-flash | Anthropic + OpenAI | ✅ Aktif | [📖 providers/agentrouter](providers/agentrouter/) |
 | [Groq](https://console.groq.com) | free tier (rate limit) | openai/gpt-oss-120b, openai/gpt-oss-20b, qwen/qwen3.6-27b, groq/compound-mini | OpenAI | ✅ Aktif | [📖 providers/groq](providers/groq/) |
 
 > Kolom "Model" di atas hanya **contoh model chat teruji** (bukan daftar lengkap). Groq misalnya punya belasan model (termasuk whisper/guard). Untuk daftar **lengkap & terkini**, jalankan: `python run.py --provider <nama> --list-models` (fetch live dari API). Daftar model bisa berubah sewaktu-waktu — lihat [CHANGELOG.md](CHANGELOG.md).
@@ -112,7 +112,7 @@ free-llm-providers/
 
 ## Disclosure (Tautan Referral)
 
-Beberapa tautan pendaftaran AgentRouter di repo ini adalah **referral link**. Jika kamu mendaftar lewat link tersebut, penulis mendapat reward credit tambahan (dan kamu juga dapat bonus) — **tanpa biaya ekstra** untukmu.
+Sebagian besar tautan AgentRouter di repo ini adalah **referral link**. Jika kamu mendaftar lewat link tersebut, penulis mendapat reward credit tambahan (dan kamu juga dapat bonus) — **tanpa biaya ekstra** untukmu.
 
 - Tautan referral: https://agentrouter.org/register?aff=8NFb
 - Skema reward (per info resmi AgentRouter): undang teman → kamu dapat **$150**, teman dapat **$50**; reward ditransfer ke saldo akun lewat fitur *transfer*.
