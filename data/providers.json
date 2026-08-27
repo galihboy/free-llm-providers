@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20",
+  "updated": "2026-08-27",
   "providers": [
     {
       "name": "AgentRouter",
@@ -20,6 +20,16 @@
       "formats": ["openai_chat"],
       "models": ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.6-27b", "groq/compound-mini", "allam-2-7b"],
       "notes": "Provider standar tanpa keistimewaan; inferensi sangat cepat; daftar model sering berubah (cek --list-models)"
+    },
+    {
+      "name": "Poolside",
+      "slug": "poolside",
+      "url": "https://poolside.ai",
+      "free_quota": "free preview terbatas waktu (limited-time preview)",
+      "status": "aktif",
+      "formats": ["openai_chat"],
+      "models": ["poolside/laguna-s-2.1", "poolside/laguna-xs-2.1"],
+      "notes": "TEXT-ONLY (no vision/multimodal); laguna-xs-2.1 reasoning butuh max_tokens >= 1024; API key via Gmail OAuth di platform.poolside.ai/api-keys; opt-out training di Settings"
     }
   ]
 }

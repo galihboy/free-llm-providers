@@ -1,0 +1,27 @@
+# Poolside — provider gratis dengan model Laguna (S 2.1 & XS 2.1)
+# Docs: https://docs.poolside.ai
+name: Poolside
+url: https://poolside.ai
+free_quota: "free preview terbatas waktu (limited-time preview)"
+status: aktif
+standalone_docs: providers/poolside/README.md
+
+formats:
+  openai_chat:
+    base_url: https://inference.poolside.ai/v1
+    endpoint: /chat/completions
+    key_env: POOLSIDE_API_KEY
+    # Model chat per 2026-08-27 (cek --list-models untuk daftar terkini)
+    models: [poolside/laguna-s-2.1, poolside/laguna-xs-2.1]
+    # extra_headers: tidak ada -> header standar saja
+    # moderation: tidak ada -> prompt dikirim apa adanya (Indonesia OK)
+    list_models:
+      endpoint: /models
+      method: GET
+
+gotcha:
+  - "TEXT-ONLY: kedua model TIDAK mendukung multimodal (image/video/audio) -> 400 'does not support multimodal'"
+  - "laguna-xs-2.1 = model reasoning: max_tokens kecil (mis. 32) -> jawaban kosong; pakai >= 1024"
+  - "laguna-m.1 sudah dihapus (404) per 2026-08-27"
+  - "API key dibuat via Gmail OAuth di https://platform.poolside.ai/api-keys"
+  - "Opt-out training data: di Settings -> 'Opt-out of Poolside using your Content for training' (default ON = data dipakai training)"

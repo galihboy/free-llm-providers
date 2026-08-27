@@ -17,6 +17,12 @@ import os
 import sys
 import time
 
+# Force UTF-8 stdout di Windows agar emoji tidak crash
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

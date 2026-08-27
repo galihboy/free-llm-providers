@@ -3,6 +3,31 @@
 Semua perubahan penting pada proyek ini dicatat di sini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
+## [0.6.0] - 2026-08-27
+
+### Ditambahkan
+- **Provider baru: Poolside** (https://poolside.ai) — free preview terbatas waktu via inference API OpenAI-compatible.
+- `providers/poolside.yaml`: format `openai_chat` dengan model `poolside/laguna-s-2.1` (118B/8B MoE, 1M context) dan `poolside/laguna-xs-2.1` (33B/3B MoE, 256K context, reasoning).
+- `providers/poolside/chat.py`: script standalone (mirror pola Groq — provider standar tanpa anchor).
+- `providers/poolside/README.md`: info Gmail OAuth untuk API key, opt-out training, gotcha text-only & reasoning.
+- `data/providers.json`: entri Poolside ditambahkan.
+- `README.md`: baris Poolside di tabel provider.
+- `.env.example`: blok `POOLSIDE_API_KEY=` + komentar cara buat via Gmail OAuth.
+
+### Catatan Penting
+- **TEXT-ONLY**: kedua model Poolside TIDAK mendukung multimodal (image/video/audio) → 400 `does not support multimodal`.
+- **Reasoning model**: `laguna-xs-2.1` butuh `max_tokens ≥ 1024`; pakai `-t 32` → jawaban kosong (token habis untuk reasoning).
+- **API key via Gmail OAuth**: login di https://platform.poolside.ai/api-keys dengan akun Google.
+- **Opt-out training**: secara default konten dipakai training Poolside. Buka **Settings** → aktifkan **"Opt-out of Poolside using your Content for training"** SEBELUM mulai pakai kalau tidak setuju.
+- **Free preview terbatas**: program gratis bisa berakhir sewaktu-waktu.
+
+### Hasil Tes
+- ✅ `--list-models` [LIVE]: 2 model (`poolside/laguna-s-2.1`, `poolside/laguna-xs-2.1`)
+- ✅ `laguna-s-2.1` chat EN: 200 OK
+- ✅ `laguna-s-2.1` chat ID: 200 OK (tidak ada moderasi bahasa)
+- ✅ Vision test: 400 `does not support multimodal` (sesuai dokumentasi)
+- ✅ `laguna-xs-2.1` reasoning: 122 reasoning_tokens untuk prompt "say OK"
+
 ## [0.5.0] - 2026-08-27
 
 ### Ditambahkan
