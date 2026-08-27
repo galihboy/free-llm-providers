@@ -116,7 +116,7 @@ free-llm-providers/
 Sebagian besar tautan AgentRouter di repo ini adalah **referral link**. Jika kamu mendaftar lewat link tersebut, penulis mendapat reward credit tambahan (dan kamu juga dapat bonus) — **tanpa biaya ekstra** untukmu.
 
 - Tautan referral: https://agentrouter.org/register?aff=8NFb
-- Skema reward (per info resmi AgentRouter): undang teman → kamu dapat **$150**, teman dapat **$50**; reward ditransfer ke saldo akun lewat fitur *transfer*.
+- Skema reward (per info resmi AgentRouter): undang teman → kamu dapat **$50**, teman juga dapat **$50**; reward ditransfer ke saldo akun lewat fitur *transfer*.
 - Tidak suka referral? Pakai link biasa: https://agentrouter.org/register
 
 ## Pencatatan Perkembangan

@@ -14,7 +14,7 @@
 | Kuota gratis | credit awal $150-200 |
 | Docs | https://agentrouter.org/docs/ |
 
-> 💡 **Referral disclosure**: tautan pendaftaran AgentRouter di dokumen ini adalah link afiliasi (referral). Jika kamu mendaftar lewat sana, penulis mendapat reward **$150** dan kamu dapat **$50** (tanpa biaya ekstra). Reward ditransfer ke saldo akun via fitur *transfer*. Mau netral? Pakai https://agentrouter.org/register.
+> 💡 **Referral disclosure**: tautan pendaftaran AgentRouter di dokumen ini adalah link afiliasi (referral). Jika kamu mendaftar lewat sana, penulis mendapat reward **$50** dan kamu juga dapat **$50** (tanpa biaya ekstra). Reward ditransfer ke saldo akun via fitur *transfer*. Mau netral? Pakai https://agentrouter.org/register.
 
 ## Model Tersedia (per 2026-08-27)
 
