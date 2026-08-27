@@ -8,6 +8,7 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi
 ### Diperbaiki
 - **Poolside**: koreksi Max Input `laguna-xs-2.1` dari `1.048.576` (1M) menjadi `262.144` (256K). Context window resmi XS 2.1 = 256K tokens (docs.poolside.ai), sebelumnya salah copy dari baris Laguna S 2.1 di `chatLanguageModels.json`. File: `providers/poolside/README.md`.
 - **AgentRouter**: koreksi skema reward referral dari "penulis $150, teman $50" menjadi "penulis $50, teman $50" (simetris). Per info terbaru AgentRouter: setiap teman yang diundang → kamu dapat $50, teman juga dapat $50; reward ditransfer ke saldo akun via fitur *transfer*. File: `README.md`, `providers/agentrouter/README.md`.
+- **AgentRouter × VS Code Copilot**: `providers/agentrouter/integrasi.md` bagian "1. VS Code GitHub Copilot" ditulis ulang — sebelumnya mengesankan bisa ditembak langsung, padahal **wajib proxy lokal**. Bukti empiris 2026-08-27: request tanpa fingerprint header `claude-cli` → `401 unauthorized client detected`; dengan fingerprint → `200 OK`. Ditambah catatan kehati-hatian untuk Cursor (belum diverifikasi, potensi 401 yang sama).
 
 ## [0.6.0] - 2026-08-27
 

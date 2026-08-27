@@ -4,7 +4,7 @@ AgentRouter mendukung 2 format, jadi cara pasangnya tergantung tool:
 
 | Tool | Format | Base URL |
 |---|---|---|
-| VS Code GitHub Copilot | Anthropic (Claude) atau OpenAI (GPT) | sesuai format |
+| VS Code GitHub Copilot | OpenAI (via **proxy lokal**) | `http://localhost:5099/v1` |
 | OpenCode | Anthropic atau OpenAI-compatible | sesuai format |
 | Claude Code | Anthropic | `https://agentrouter.org` (tanpa /v1) |
 | Codex | OpenAI Responses | `https://agentrouter.org/v1` |
@@ -14,12 +14,25 @@ AgentRouter mendukung 2 format, jadi cara pasangnya tergantung tool:
 
 ## 1. VS Code GitHub Copilot
 
-1. Buka Copilot Chat → **Manage Models** → **Add Model** → **Custom Endpoint**.
-2. Group: `AgentRouter`, masukkan API key.
-3. Pilih API format:
-   - **Claude** (claude-opus-5, claude-opus-4-8) → format **Messages**, Base URL `https://agentrouter.org`
-   - **GPT** (gpt-5.6-sol) → format **Chat Completions**, Base URL `https://agentrouter.org/v1`
-4. Tes: kirim "hanya balas OK".
+> ⚠️ **WAJIB pakai proxy lokal** — Copilot **tidak bisa** menembak AgentRouter langsung.
+>
+> **Bukti empiris** (2026-08-27): request TANPA fingerprint header `claude-cli` → `401 unauthorized client detected`; DENGAN fingerprint → `200 OK`. Copilot mengirim user-agent miliknya sendiri yang tidak bisa dikustomisasi, jadi selalu kena 401.
+>
+> **Alasan lain** (selain fingerprint): Copilot menyisipkan system prompt raksasa (~150-200KB) yang kena `content-blocked`, dan memakai format OpenAI (`tool_calls`) yang tidak cocok dengan Claude (butuh `tool_use`).
+>
+> **Solusi**: jalankan proxy dulu, lalu arahkan Copilot ke `http://localhost:5099`. Panduan lengkap (4 alasan teknis + langkah + contoh `chatLanguageModels.json`): lihat [`integrations/vscode-copilot.md`](../../integrations/vscode-copilot.md).
+
+```bash
+# 1. Jalankan proxy (biarkan terminal tetap terbuka)
+pip install flask
+python tools/proxy_openai_to_anthropic.py
+```
+
+Lalu di Copilot Chat → **Manage Models** → **Add Model** → **Custom Endpoint**:
+- Group: `AgentRouter (Proxy)`, API Key: isi apa saja (key asli dibaca proxy dari `.env`)
+- API format: **OpenAI Chat Completions**
+- Base URL: `http://localhost:5099/v1`
+- Model ID: `claude-opus-5`, `claude-opus-4-8`, `gpt-5.6-sol`, `glm-5.3`, atau `deepseek-v4-flash`
 
 ## 2. OpenCode
 
@@ -86,3 +99,4 @@ experimental_bearer_token = "API_KEY_KAMU"
 Settings → Models → isi **OpenAI API Key** dengan API key AgentRouter → aktifkan **Override OpenAI Base URL** → `https://agentrouter.org/v1`.
 
 > ⚠️ Keterbatasan Cursor: user gratis hanya bisa mode `auto`, tidak bisa pilih model manual.
+> ⚠️ **Belum diverifikasi**: AgentRouter mem-fingerprint client (butuh header `claude-cli`). Jika Cursor mengirim user-agent miliknya sendiri, kemungkinan kena `401 unauthorized client` seperti VS Code Copilot — solusinya sama: pakai proxy lokal.
