@@ -22,7 +22,7 @@
 | Model | ID | Tipe | Vision | Tool Calling | Max Input | Max Output | Catatan |
 |---|---|---|---|---|---|---|---|
 | Laguna S 2.1 | `poolside/laguna-s-2.1` | chat | ❌ | ✅ | 1.048.576 | 32.768 | model utama (118B/8B MoE, 1M context) |
-| Laguna XS 2.1 | `poolside/laguna-xs-2.1` | reasoning | ❌ | ✅ | 1.048.576 | 32.768 | lebih kecil & cepat (33B/3B MoE, 256K context); butuh `-t ≥1024` |
+| Laguna XS 2.1 | `poolside/laguna-xs-2.1` | reasoning | ❌ | ✅ | 262.144 | 32.768 | lebih kecil & cepat (33B/3B MoE, 256K context); butuh `-t ≥1024` |
 
 > ⚠️ `poolside/laguna-m.1` sudah **dihapus** (404) per 2026-08-27.
 > ⚠️ Kedua model **TEXT-ONLY** — tidak mendukung image/video/audio. Kirim image akan dapat `400 "does not support multimodal"`.
