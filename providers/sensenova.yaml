@@ -1,0 +1,74 @@
+# SenseNova — provider gratis (public beta) dengan 4 model utama
+# Docs: https://platform.sensenova.ai/docs
+# Models: https://www.sensenova.ai/models
+# Token Plan: https://www.sensenova.ai/token-plan
+name: SenseNova
+url: https://www.sensenova.ai
+free_quota: "public beta gratis: 1.500 calls / 5 jam per model (Flash-Lite rebate program)"
+status: aktif
+standalone_docs: providers/sensenova/README.md
+
+formats:
+  # Format OpenAI Chat Completions — untuk chat model (sensenova-6.8-flash-lite)
+  openai_chat:
+    base_url: https://token.sensenova.ai/v1
+    endpoint: /chat/completions
+    key_env: SENSENOVA_API_KEY
+    # Model chat per 2026-09-09 (cek --list-models untuk daftar terkini)
+    models: [sensenova-6.8-flash-lite, sensenova-6.7-flash-lite]
+    # extra_headers: tidak ada -> header standar saja
+    # moderation: tidak ada -> prompt dikirim apa adanya (Indonesia OK)
+    list_models:
+      endpoint: /models
+      method: GET
+
+  # Format Anthropic Messages — untuk chat model (sensenova-6.8-flash-lite)
+  # Base URL TANPA /v1 (SDK otomatis append /v1/messages)
+  anthropic_messages:
+    base_url: https://token.sensenova.ai
+    endpoint: /v1/messages
+    key_env: SENSENOVA_API_KEY
+    models: [sensenova-6.8-flash-lite, sensenova-6.7-flash-lite]
+    # extra_headers: tidak ada -> header standar saja
+    # moderation: tidak ada -> prompt dikirim apa adanya (Indonesia OK)
+    list_models:
+      endpoint: /v1/models
+      method: GET
+
+  # Format OpenAI Images Generations — untuk image generation (sensenova-u1.5-lite, sensenova-u1-fast)
+  openai_images:
+    base_url: https://token.sensenova.ai/v1
+    endpoint: /images/generations
+    key_env: SENSENOVA_API_KEY
+    # Model image generation per 2026-09-09
+    models: [sensenova-u1.5-lite, sensenova-u1-fast]
+    # extra_headers: tidak ada -> header standar saja
+    list_models:
+      endpoint: /models
+      method: GET
+
+  # Format OpenAI Images Edits — untuk image editing (sensenova-u1.5-lite)
+  openai_images_edits:
+    base_url: https://token.sensenova.ai/v1
+    endpoint: /images/edits
+    key_env: SENSENOVA_API_KEY
+    models: [sensenova-u1.5-lite]
+    list_models:
+      endpoint: /models
+      method: GET
+
+gotcha:
+  - "Public beta gratis: 1.500 calls / 5 jam per model; Flash-Lite rebate program (1 Flash-Lite point = 1 General point rebate next day)"
+  - "sensenova-6.8-flash-lite: multimodal (text + image input), tool calling, reasoning_effort (low/medium/high/none), streaming SSE"
+  - "sensenova-u1.5-lite: text-to-image + image-to-image editing; dedicated /images/generations & /images/edits endpoints; watermark=false free during beta"
+  - "sensenova-u1-fast: infographic generation only; dedicated /images/generations endpoint; NO chat, NO image input; size default 2752x1536 (16:9)"
+  - "OpenAI-compatible base_url: https://token.sensenova.ai/v1 (dengan /v1)"
+  - "Anthropic-compatible base_url: https://token.sensenova.ai (TANPA /v1, SDK append /v1/messages)"
+  - "Image URLs returned are temporary (24h for u1.5-lite, 1h for u1-fast); download immediately"
+  - "response_format: b64_json (default) atau url; b64_json lebih reliable (zero extra network call)"
+  - "watermark parameter: explicitly set true/false to avoid future default changes post-beta"
+  - "prompt_extend: true (default) = auto prompt refinement; false = use prompt as-is"
+  - "Points system: General Points (all models) + Flash-Lite Points (Flash-Lite only); 60k/5h + 600k/7d rolling limits"
+  - "Model sensenova-6.7-flash-lite auto-redirect ke sensenova-6.8-flash-lite (compatibility routing until Aug 31)"
+  - "Error codes: 429 quota_exceeded (retry exponential backoff), 403 permission_denied, 404 not_found (model retired)"
+  - "AI Tool Integration: Cursor, Cline, Continue, OpenCode, TRAE, OpenClaw, Hermes Agent, Claude Code, Office Raccoon"

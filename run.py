@@ -145,23 +145,52 @@ def main():
     print(f"Pesan   : {args.pesan}")
     print("-" * 60)
 
-    result = client.chat(fmt_cfg, model, args.pesan, max_tokens=args.tokens)
+    # Handle different format types
+    if fmt_name in ("openai_images", "openai_images_edits"):
+        # Image generation/edit formats
+        if fmt_name == "openai_images":
+            result = client.generate(fmt_cfg, model, args.pesan, max_tokens=args.tokens)
+        else:
+            # For edits, we'd need image input - not supported via CLI yet
+            print("Error: openai_images_edits requires image input (not supported via CLI yet)")
+            sys.exit(1)
 
-    if result.get("answer") is None:
-        print(f"HTTP {result.get('status')}: {result.get('error', '')}")
-        sys.exit(1)
+        if result.get("images") is None:
+            print(f"HTTP {result.get('status')}: {result.get('error', '')}")
+            sys.exit(1)
 
-    print("\nJawaban:")
-    print("=" * 60)
-    print(result["answer"])
+        print("\nGambar berhasil digenerate:")
+        print("=" * 60)
+        for i, img in enumerate(result["images"]):
+            if "b64_json" in img:
+                print(f"  [{i+1}] Base64 image ({len(img['b64_json'])} chars)")
+            elif "url" in img:
+                print(f"  [{i+1}] URL: {img['url']}")
 
-    usage = result.get("usage")
-    if usage:
-        print("\nUsage:")
-        print(f"  input_tokens     : {usage.get('input_tokens', usage.get('prompt_tokens', '?'))}")
-        print(f"  output_tokens    : {usage.get('output_tokens', usage.get('completion_tokens', '?'))}")
-        print(f"  total_tokens     : {usage.get('total_tokens', '?')}")
-    print(f"\nLatency: {result['latency_ms']:.0f} ms")
+        usage = result.get("usage")
+        if usage:
+            print("\nUsage:")
+            print(f"  {usage}")
+        print(f"\nLatency: {result['latency_ms']:.0f} ms")
+    else:
+        # Chat formats
+        result = client.chat(fmt_cfg, model, args.pesan, max_tokens=args.tokens)
+
+        if result.get("answer") is None:
+            print(f"HTTP {result.get('status')}: {result.get('error', '')}")
+            sys.exit(1)
+
+        print("\nJawaban:")
+        print("=" * 60)
+        print(result["answer"])
+
+        usage = result.get("usage")
+        if usage:
+            print("\nUsage:")
+            print(f"  input_tokens     : {usage.get('input_tokens', usage.get('prompt_tokens', '?'))}")
+            print(f"  output_tokens    : {usage.get('output_tokens', usage.get('completion_tokens', '?'))}")
+            print(f"  total_tokens     : {usage.get('total_tokens', '?')}")
+        print(f"\nLatency: {result['latency_ms']:.0f} ms")
 
 
 if __name__ == "__main__":

@@ -32,6 +32,7 @@ jobs:
           AGENTROUTER_API_KEY=${{ secrets.AGENTROUTER_API_KEY }}
           AGENTROUTER_API_KEY_OPENAI=${{ secrets.AGENTROUTER_API_KEY_OPENAI }}
           GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
+          SENSENOVA_API_KEY=${{ secrets.SENSENOVA_API_KEY }}
           EOF
         shell: bash
 

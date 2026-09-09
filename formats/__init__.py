@@ -4,9 +4,11 @@ Tambah format baru di sini (misal openai_responses, gemini), lalu daftarkan
 di FORMAT_CLIENTS agar bisa dipakai lewat run.py.
 """
 
-from . import anthropic_messages, openai_chat
+from . import anthropic_messages, openai_chat, openai_images, openai_images_edits
 
 FORMAT_CLIENTS = {
     "openai_chat": openai_chat,
     "anthropic_messages": anthropic_messages,
+    "openai_images": openai_images,
+    "openai_images_edits": openai_images_edits,
 }

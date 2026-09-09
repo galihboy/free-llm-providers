@@ -54,6 +54,8 @@ def smoke_one(provider_name, provider_cfg, fmt_name, fmt_cfg, prompt):
         return {"status": "SKIP", "detail": f"format {fmt_name} belum diimplementasikan"}
 
     client = FORMAT_CLIENTS[fmt_name]
+    if not hasattr(client, "chat"):
+        return {"status": "SKIP", "detail": f"format {fmt_name} diuji via run.py atau client khusus"}
     try:
         result = client.chat(fmt_cfg, model, prompt, max_tokens=64, timeout=60)
     except Exception as e:

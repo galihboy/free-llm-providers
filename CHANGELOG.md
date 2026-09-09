@@ -3,6 +3,28 @@
 Semua perubahan penting pada proyek ini dicatat di sini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
+## [0.7.0] - 2026-09-09
+
+### Ditambahkan
+- **Provider baru: SenseNova** (https://www.sensenova.ai) — public beta gratis dari SenseTime dengan endpoint OpenAI-compatible dan Anthropic-compatible.
+- `providers/sensenova.yaml`: model `sensenova-6.8-flash-lite` dan `sensenova-6.7-flash-lite` untuk chat multimodal, `sensenova-u1.5-lite` untuk generasi/edit gambar, dan `sensenova-u1-fast` untuk infografis.
+- `formats/openai_images.py`: client reusable untuk endpoint `/images/generations` dengan dukungan Base64/URL, ukuran, format output, watermark, dan prompt extension.
+- `formats/openai_images_edits.py`: client reusable untuk endpoint `/images/edits` dengan input URL atau Data URL Base64.
+- `run.py`: dukungan menjalankan format image generation melalui `client.generate()`.
+- `providers/sensenova/chat.py`: script standalone untuk chat OpenAI/Anthropic dan daftar model.
+- `providers/sensenova/image.py`: script standalone untuk generasi dan edit gambar, termasuk penyimpanan hasil ke file.
+- `providers/sensenova/README.md`: panduan berbahasa Indonesia, model, parameter, kuota, gotcha, dan status pengujian.
+- `.env.example`: variabel `SENSENOVA_API_KEY`.
+
+### Hasil Tes
+- ✅ `sensenova-6.8-flash-lite` via OpenAI Chat: 200 OK.
+- ✅ `sensenova-6.8-flash-lite` via Anthropic Messages: 200 OK.
+- ✅ `sensenova-u1.5-lite` via `run.py`: berhasil menghasilkan satu gambar Base64, latency sekitar 26 detik.
+- ✅ `providers/sensenova/chat.py`: chat standalone berhasil.
+- ✅ `providers/sensenova/image.py`: generation dan editing standalone berhasil; PNG generation dipakai sebagai input edit.
+- ⚠️ `run.py` belum menerima input gambar untuk editing; gunakan script standalone `image.py`.
+- ⚠️ `tools/smoke_test_all.py` masih khusus format chat; format image tidak diuji oleh smoke test umum.
+
 ## [0.6.1] - 2026-08-27
 
 ### Diperbaiki

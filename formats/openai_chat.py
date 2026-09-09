@@ -57,8 +57,10 @@ def chat(cfg, model, prompt, max_tokens=512, timeout=120):
         }
 
     data = resp.json()
+    message = data["choices"][0].get("message", {})
+    answer = message.get("content") or message.get("reasoning") or ""
     return {
-        "answer": data["choices"][0]["message"]["content"],
+        "answer": answer,
         "usage": data.get("usage"),
         "status": resp.status_code,
         "latency_ms": latency_ms,

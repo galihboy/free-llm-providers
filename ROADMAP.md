@@ -8,6 +8,7 @@ Status perkembangan proyek dan rencana ke depan. Untuk riwayat perubahan detail 
 |---|---|---|---|---|---|
 | AgentRouter | ✅ | ✅ | ✅ 2026-08-20 | ✅ | 2 format (Anthropic + OpenAI) |
 | Groq | ✅ | ✅ | ✅ 2026-08-20 | — | contoh provider standar |
+| SenseNova | ✅ | ✅ 2026-09-09 | ✅ 2026-09-09 | ✅ | Chat OpenAI/Anthropic + generasi/edit gambar |
 
 ### Kandidat Berikutnya (dari koleksi tes sebelumnya)
 

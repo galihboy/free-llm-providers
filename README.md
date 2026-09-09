@@ -33,6 +33,7 @@ Kurasi provider LLM **gratis** (atau free credit) yang sudah **dites langsung**,
 | [AgentRouter](https://agentrouter.org/register?aff=8NFb) | credit $150-200 | claude-opus-5, claude-opus-4-8, gpt-5.6-sol, glm-5.3, deepseek-v4-flash | Anthropic + OpenAI | ✅ Aktif | [📖 providers/agentrouter](providers/agentrouter/) |
 | [Groq](https://console.groq.com) | free tier (rate limit) | openai/gpt-oss-120b, openai/gpt-oss-20b, qwen/qwen3.6-27b, groq/compound-mini | OpenAI | ✅ Aktif | [📖 providers/groq](providers/groq/) |
 | [Poolside](https://poolside.ai) | free preview (terbatas waktu) | poolside/laguna-s-2.1, poolside/laguna-xs-2.1 | OpenAI | ✅ Aktif | [📖 providers/poolside](providers/poolside/) |
+| [SenseNova](https://www.sensenova.ai) | public beta (1.500 panggilan / 5 jam per model) | sensenova-6.8-flash-lite, sensenova-6.7-flash-lite, sensenova-u1.5-lite, sensenova-u1-fast | OpenAI + Anthropic + Images | ✅ Aktif | [📖 providers/sensenova](providers/sensenova/) |
 
 > Kolom "Model" di atas hanya **contoh model chat teruji** (bukan daftar lengkap). Groq misalnya punya belasan model (termasuk whisper/guard). Untuk daftar **lengkap & terkini**, jalankan: `python run.py --provider <nama> --list-models` (fetch live dari API). Daftar model bisa berubah sewaktu-waktu — lihat [CHANGELOG.md](CHANGELOG.md).
 
@@ -87,7 +88,11 @@ free-llm-providers/
 │   ├── agentrouter.yaml
 │   ├── agentrouter/        # ← folder standalone (README + script mandiri)
 │   ├── groq.yaml
-│   └── groq/
+│   ├── groq/
+│   ├── poolside.yaml
+│   ├── poolside/
+│   ├── sensenova.yaml
+│   └── sensenova/
 ├── integrations/           # Panduan pasang di tools coding
 ├── tools/
 │   └── smoke_test_all.py   # Tes semua provider → tabel hasil
