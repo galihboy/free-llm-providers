@@ -3,7 +3,19 @@
 Semua perubahan penting pada proyek ini dicatat di sini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
-## [0.7.1] - 2026-09-09
+## [0.7.2] - 2026-09-12
+
+### Diperbaiki
+- **README root**: tabel provider kini memuat `gpt-6-astra` (tertinggal sejak 0.7.1 — saat itu hanya `agentrouter.yaml`, README provider, `providers.json`, dan `integrations/` yang diupdate). Tree "Struktur Repo" diperbarui: client `formats/` kini 5 (tambah `openai_images.py` + `openai_images_edits.py`), plus folder `anchors/`, `tools/proxy_openai_to_anthropic.py`, dan workflow CI `.github/workflows/smoke.yml`.
+- **AgentRouter**: badge sinkronisasi standalone diperbarui 2026-08-20 → 2026-09-12; docstring `chat_openai.py` dan `chat_anthropic.py` kini mencantumkan semua model (`glm-5.3`, `deepseek-v4-flash` sebelumnya tidak disebut).
+- **Poolside**: header tabel Info Dasar diperbaiki (3 kolom → 2 kolom, sesuai isi baris).
+- **Groq**: README provider kini memuat `allam-2-7b` (sebelumnya hanya ada di `data/providers.json`).
+
+### Diubah
+- **CONTRIBUTING.md**: aturan sinkronisasi kategori "Data provider" — update README root kini **wajib**, bukan opsional (akar masalah drift 0.7.1).
+- **SenseNova**: heading "Cara Pakai" menjadi "Cara Pakai (Framework)" agar sejajar dengan "Cara Pakai (Standalone)".
+
+## [0.7.1] - 2026-09-12
 
 ### Ditambahkan
 - **Model baru: `gpt-6-astra`** di AgentRouter — tersedia di kedua endpoint (OpenAI + Anthropic), mendukung chat + vision, bukan model reasoning.

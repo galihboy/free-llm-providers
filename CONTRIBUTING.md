@@ -9,7 +9,7 @@ Terima kasih sudah mau berkontribusi! Repo ini punya **dua lapisan** yang harus 
 
 | Jenis perubahan | Edit di | Lalu |
 |---|---|---|
-| Data provider (model, kuota, gotcha, endpoint) | **HANYA** `providers/<nama>.yaml` + `data/providers.json` | Update README provider jika perlu |
+| Data provider (model, kuota, gotcha, endpoint) | `providers/<nama>.yaml` + `data/providers.json` | **WAJIB**: update README root (tabel provider) + README provider; `integrations/` jika berlaku |
 | Logika format API (header, payload, parsing) | **HANYA** `formats/<format>.py` | Sync ke script standalone provider terkait |
 | Provider baru | Buat `providers/<nama>.yaml` + folder `providers/<nama>/` (README + script standalone) | Tambah baris di README root + `data/providers.json` |
 

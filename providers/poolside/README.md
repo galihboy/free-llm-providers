@@ -7,8 +7,8 @@
 
 ## Info Dasar
 
-| | | |
-|---|---|---|
+| | |
+|---|---|
 | Website | https://poolside.ai |
 | Daftar / Ambil API key | https://platform.poolside.ai/api-keys (login via **Gmail OAuth**) |
 | Kuota gratis | free preview terbatas waktu (limited-time preview) |

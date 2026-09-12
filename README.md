@@ -30,7 +30,7 @@ Kurasi provider LLM **gratis** (atau free credit) yang sudah **dites langsung**,
 
 | Provider | Kuota Gratis | Model | Format API | Status | Panduan |
 |---|---|---|---|---|---|
-| [AgentRouter](https://agentrouter.org/register?aff=8NFb) | credit $150-200 | claude-opus-5, claude-opus-4-8, gpt-5.6-sol, glm-5.3, deepseek-v4-flash | Anthropic + OpenAI | ✅ Aktif | [📖 providers/agentrouter](providers/agentrouter/) |
+| [AgentRouter](https://agentrouter.org/register?aff=8NFb) | credit $150-200 | claude-opus-5, claude-opus-4-8, gpt-5.6-sol, gpt-6-astra, glm-5.3, deepseek-v4-flash | Anthropic + OpenAI | ✅ Aktif | [📖 providers/agentrouter](providers/agentrouter/) |
 | [Groq](https://console.groq.com) | free tier (rate limit) | openai/gpt-oss-120b, openai/gpt-oss-20b, qwen/qwen3.6-27b, groq/compound-mini | OpenAI | ✅ Aktif | [📖 providers/groq](providers/groq/) |
 | [Poolside](https://poolside.ai) | free preview (terbatas waktu) | poolside/laguna-s-2.1, poolside/laguna-xs-2.1 | OpenAI | ✅ Aktif | [📖 providers/poolside](providers/poolside/) |
 | [SenseNova](https://www.sensenova.ai) | public beta (1.500 panggilan / 5 jam per model) | sensenova-6.8-flash-lite, sensenova-6.7-flash-lite, sensenova-u1.5-lite, sensenova-u1-fast | OpenAI + Anthropic + Images | ✅ Aktif | [📖 providers/sensenova](providers/sensenova/) |
@@ -83,7 +83,9 @@ free-llm-providers/
 ├── formats/                # Client reusable per format API
 │   ├── base.py             # Helper: headers, anchor, parsing
 │   ├── openai_chat.py      # POST /v1/chat/completions
-│   └── anthropic_messages.py  # POST /v1/messages
+│   ├── anthropic_messages.py  # POST /v1/messages
+│   ├── openai_images.py    # POST /v1/images/generations
+│   └── openai_images_edits.py  # POST /v1/images/edits
 ├── providers/              # Config (YAML) + panduan standalone per provider
 │   ├── agentrouter.yaml
 │   ├── agentrouter/        # ← folder standalone (README + script mandiri)
@@ -94,8 +96,11 @@ free-llm-providers/
 │   ├── sensenova.yaml
 │   └── sensenova/
 ├── integrations/           # Panduan pasang di tools coding
+├── anchors/                # Anchor moderasi per tugas (YAML, bisa per-provider)
+├── .github/workflows/      # CI: smoke test harian → badge README
 ├── tools/
-│   └── smoke_test_all.py   # Tes semua provider → tabel hasil
+│   ├── smoke_test_all.py   # Tes semua provider → tabel hasil
+│   └── proxy_openai_to_anthropic.py  # Proxy lokal Flask utk VS Code Copilot
 └── data/
     └── providers.json      # Registry machine-readable
 ```

@@ -1,6 +1,6 @@
 # AgentRouter 🆓
 
-> 🔄 Standalone script: sinkron dengan `formats/` per 2026-08-20
+> 🔄 Standalone script: sinkron dengan `formats/` per 2026-09-12
 > ℹ️ Provider ini juga tersedia via framework: `python run.py --provider agentrouter`
 
 **AgentRouter** (https://agentrouter.org/register?aff=8NFb) adalah router LLM gratis dengan credit awal **$150-200**. Unik karena mendukung **2 format API sekaligus**: Anthropic Messages dan OpenAI Chat Completions.

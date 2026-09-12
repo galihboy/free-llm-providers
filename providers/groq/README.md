@@ -14,7 +14,7 @@
 | Kuota gratis | free tier, rate limit harian |
 | Format API | OpenAI Compatible |
 
-## Model Populer (per 2026-08-20)
+## Model Populer (per 2026-09-12)
 
 | Model | ID |
 |---|---|
@@ -22,6 +22,7 @@
 | GPT-OSS 20B | `openai/gpt-oss-20b` |
 | Qwen 3.6 27B | `qwen/qwen3.6-27b` |
 | Compound Mini | `groq/compound-mini` |
+| ALLaM 2 7B | `allam-2-7b` |
 
 > ⚠️ Daftar model Groq sering berubah (model lama seperti `llama-3.3-70b-versatile` sudah tidak ada). Selalu cek `--list-models` untuk daftar terkini.
 

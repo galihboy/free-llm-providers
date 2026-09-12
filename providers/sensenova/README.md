@@ -29,7 +29,7 @@ public beta, dengan kuota dan sistem poin yang dapat berubah.
 
 > ⚠️ `sensenova-u1-fast` bukan model chat dan tidak mendukung input gambar.
 
-## Cara Pakai
+## Cara Pakai (Framework)
 
 Isi `.env` di root repositori:
 
