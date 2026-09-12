@@ -5,7 +5,7 @@ Tidak butuh folder formats/ atau run.py.
 Versi terintegrasi (multi-provider): lihat /run.py
 
 Endpoint: POST https://agentrouter.org/v1/chat/completions
-Model:    gpt-5.6-sol
+Model:    gpt-5.6-sol, gpt-6-astra
 
 GOTCHA:
   - Header user-agent "claude-cli/..." + x-stainless-* WAJIB, kalau tidak 401.

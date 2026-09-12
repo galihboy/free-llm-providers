@@ -23,6 +23,7 @@
 | `claude-opus-5` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | |
 | `claude-opus-4-8` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | |
 | `gpt-5.6-sol` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | bisa lewat kedua endpoint |
+| `gpt-6-astra` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | baru per 2026-09; chat+vision OK, tool calling OK, BUKAN model reasoning |
 | `glm-5.3` | Anthropic + OpenAI | ❌ | ✅ | 1.048.576 | 131.072 | baru per 2026-08-27 |
 | `deepseek-v4-flash` | Anthropic + OpenAI | ❌ | ✅ | 1.048.576 | 393.216 | baru per 2026-08-27; butuh `-t ≥1024` |
 

@@ -32,7 +32,7 @@ Lalu di Copilot Chat → **Manage Models** → **Add Model** → **Custom Endpoi
 - Group: `AgentRouter (Proxy)`, API Key: isi apa saja (key asli dibaca proxy dari `.env`)
 - API format: **OpenAI Chat Completions**
 - Base URL: `http://localhost:5099/v1`
-- Model ID: `claude-opus-5`, `claude-opus-4-8`, `gpt-5.6-sol`, `glm-5.3`, atau `deepseek-v4-flash`
+- Model ID: `claude-opus-5`, `claude-opus-4-8`, `gpt-5.6-sol`, `gpt-6-astra`, `glm-5.3`, atau `deepseek-v4-flash`
 
 ## 2. OpenCode
 

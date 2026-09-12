@@ -3,6 +3,17 @@
 Semua perubahan penting pada proyek ini dicatat di sini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
+## [0.7.1] - 2026-09-09
+
+### Ditambahkan
+- **Model baru: `gpt-6-astra`** di AgentRouter — tersedia di kedua endpoint (OpenAI + Anthropic), mendukung chat + vision, bukan model reasoning.
+
+### Diperbarui
+- `providers/agentrouter.yaml`: tambah `gpt-6-astra` ke daftar model di kedua format (Anthropic Messages + OpenAI Chat).
+- `providers/agentrouter/README.md`: tambah baris model `gpt-6-astra` di tabel model.
+- `data/providers.json`: tambah `gpt-6-astra` ke daftar model AgentRouter + catatan.
+- `integrations/vscode-copilot.md`: tambah entry `gpt-6-astra` di `chatLanguageModels.json`.
+
 ## [0.7.0] - 2026-09-09
 
 ### Ditambahkan

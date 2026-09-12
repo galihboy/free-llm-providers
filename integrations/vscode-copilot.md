@@ -108,6 +108,15 @@ File lokasi: `%APPDATA%\Code\User\chatLanguageModels.json` (Windows) atau `~/.co
       "maxOutputTokens": 128000
     },
     {
+      "id": "gpt-6-astra",
+      "name": "AR GPT-6 Astra",
+      "url": "http://localhost:5099",
+      "toolCalling": true,
+      "vision": true,
+      "maxInputTokens": 1000000,
+      "maxOutputTokens": 128000
+    },
+    {
       "id": "glm-5.3",
       "name": "AR glm-5.3",
       "url": "http://localhost:5099",

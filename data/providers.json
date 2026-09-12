@@ -8,8 +8,8 @@
       "free_quota": "credit awal $150-200",
       "status": "aktif",
       "formats": ["anthropic_messages", "openai_chat"],
-      "models": ["claude-opus-5", "claude-opus-4-8", "gpt-5.6-sol", "glm-5.3", "deepseek-v4-flash"],
-      "notes": "Butuh fingerprint header claude-cli; prompt non-Inggris butuh ENGLISH_ANCHOR; deepseek-v4-flash butuh max_tokens >= 1024 (reasoning)"
+      "models": ["claude-opus-5", "claude-opus-4-8", "gpt-5.6-sol", "gpt-6-astra", "glm-5.3", "deepseek-v4-flash"],
+      "notes": "Butuh fingerprint header claude-cli; prompt non-Inggris butuh ENGLISH_ANCHOR; deepseek-v4-flash butuh max_tokens >= 1024 (reasoning); gpt-6-astra baru per 2026-09, chat+vision OK, BUKAN model reasoning"
     },
     {
       "name": "Groq",
