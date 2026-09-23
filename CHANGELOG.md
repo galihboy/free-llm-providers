@@ -3,6 +3,52 @@
 Semua perubahan penting pada proyek ini dicatat di sini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
+## [0.8.0] - 2026-09-23
+
+### Ditambahkan
+- **Provider baru: HCNSec** (https://api.hcnsec.cn/) — gateway agregator LLM 公益 dari 新疆幻城网安科技 (Xinjiang Huancheng Cybersecurity), dibangun di atas NewAPI. OpenAI-compatible, tanpa fingerprint, free credit registrasi + check-in harian.
+- `providers/hcnsec.yaml`: format `openai_chat` dengan 5 model free layer teruji (`DeepSeek-V4-Flash`, `glm-5.3-flash`, `Qwen3.8-27B`, `Qwen3.8-Flash-Next`, `sensenova-6.8-flash-lite`) + `list_models` live + gotcha lengkap (case-sensitive, rate limit, channel, substitution, free/svip tier).
+- `providers/hcnsec/chat.py`: script standalone (mirror pola Groq/Poolside) + force IPv4.
+- `providers/hcnsec/README.md`: panduan Bahasa Indonesia, model teruji/gagal, gotcha, status pengujian.
+- `data/providers.json`: entri HCNSec (`status: terbatas`).
+- `.env.example`: variabel `HCNSEC_API_KEY`.
+- **README root**: baris HCNSec di tabel provider + tree "Struktur Repo" (`hcnsec.yaml` + `hcnsec/`) + Disclosure referral HCNSec.
+- **ROADMAP.md**: baris HCNSec di tabel Progress Provider (`✅ YAML+standalone`, `⚠️ Teruji 5/10 model`).
+- **Referral**: semua tautan daftar HCNSec → `https://api.hcnsec.cn/sign-up?aff=Q7jj` (README root, README provider, `.env.example`) + disclosure di README provider.
+
+### Hasil Tes (2026-09-23)
+- ✅ `--list-models` [LIVE]: 28 model (free + svip + audio/image)
+- ✅ Framework: `DeepSeek-V4-Flash` (31s cold / 5s warm), `glm-5.3-flash` (3.6s), `Qwen3.8-27B` (14s), `Qwen3.8-Flash-Next` (13s), `sensenova-6.8-flash-lite` (4.3s)
+- ✅ Standalone `chat.py`: `DeepSeek-V4-Flash` 200 OK (5.4s)
+- ✅ `smoke_test_all.py` (retry setelah jeda 60s): hcnsec `DeepSeek-V4-Flash` 200 OK (32.6s) — tanpa skip selain agentrouter
+- ❌ `MiniMax-M3`/`step-3.7-flash`/`step-router-v1`: `500 get_channel_failed` (model listed tapi channel group auto tidak ada)
+- ❌ `DeepSeek-V4-Pro`: `404 openai_error` · `DeepSeek-V4.1-Flash`: `400 not supported` · `auto`: `522` · `kimi-k3`: timeout >120s (2×)
+- ⚠️ Rate limit ketat: `400 Throttling.RateQuota` muncul saat tes beruntun — window bisa >90s; beri jeda antar request (smoke gagal→lolos setelah cooldown)
+
+### Catatan
+- Riset web: docs resmi `/free-api/` (model tier free vs svip), probe independen BazaarLink (substitution model), freeairouter risk Medium (55/100). Identitas model relay **tidak terjamin** — jangan utk data sensitif/produksi.
+- Sumber adaptasi: eksperimen lokal `D:\PythonKu\_Eksperimen\Gemini-AI\smoke_hcnsec.py` & `tes_hcnsec.py` (force IPv4, parsing reasoning_content, filter non-text) dipetakan ke pola standalone repo.
+- **Catatan kontribusi**: PR terpisah / commit terpisah direkomendasikan utk review — v0.7.3 (AgentRouter 402/503) sudah bersih dari v0.8.0 (HCNSec) di working tree.
+
+## [0.7.3] - 2026-09-23
+
+### Hasil Tes
+Tes per-model AgentRouter (6 model × kedua format, `-t 1024`) — **1/6 hidup**:
+- ✅ `deepseek-v4-flash` via openai_chat (2211 ms) & anthropic_messages (3464 ms)
+- ❌ `claude-opus-5`, `claude-opus-4-8`, `gpt-6-astra` → **HTTP 402** `Budget pool quota has been exhausted` (kuota budget pool akun habis; key valid, bukan masalah fingerprint)
+- ❌ `gpt-5.6-sol`, `glm-5.3` → **HTTP 503** `无可用渠道` / no available channel di group `default` (gateway New API tanpa channel upstream — gangguan sementara sisi AgentRouter, konsisten di kedua format)
+- Catalog check (models.dev + npm `pi-agentrouter`): daftar 6 model di repo = katalog terkini; err di atas masalah kuota/routing, bukan model dihapus. Rilis `gpt-6-astra` OpenAI resmi 2026-09-03.
+
+### Ditambahkan
+- **Gotcha 402 & 503** di `providers/agentrouter.yaml` dan `providers/agentrouter/README.md` (arti + konteks tes 2026-09-23), plus catatan ketersediaan dinamis per resource pool akun.
+- `run.py`: `sys.stdout/stderr.reconfigure(encoding="utf-8")` — fix `UnicodeEncodeError` (cp1252) saat mencetak err 503 berhuruf Cina dari AgentRouter (pola sama dengan yang sudah ada di `tools/smoke_test_all.py`).
+
+### Diubah
+- **README root**: status AgentRouter `✅ Aktif` → `⚠️ Terbatas (2026-09-23)`.
+- **`data/providers.json`**: `status` AgentRouter → `terbatas`; `notes` ditambah ringkasan hasil tes; `updated` → 2026-09-23.
+- **`providers/agentrouter/README.md`**: badge sinkronisasi standalone 2026-09-12 → 2026-09-23.
+- **ROADMAP.md**: tabel Progress Provider tambah baris Poolside (teruji di smoke sesi sama).
+
 ## [0.7.2] - 2026-09-12
 
 ### Diperbaiki

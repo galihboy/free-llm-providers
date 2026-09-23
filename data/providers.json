@@ -1,15 +1,15 @@
 {
-  "updated": "2026-09-09",
+  "updated": "2026-09-23",
   "providers": [
     {
       "name": "AgentRouter",
       "slug": "agentrouter",
       "url": "https://agentrouter.org",
       "free_quota": "credit awal $150-200",
-      "status": "aktif",
+      "status": "terbatas",
       "formats": ["anthropic_messages", "openai_chat"],
       "models": ["claude-opus-5", "claude-opus-4-8", "gpt-5.6-sol", "gpt-6-astra", "glm-5.3", "deepseek-v4-flash"],
-      "notes": "Butuh fingerprint header claude-cli; prompt non-Inggris butuh ENGLISH_ANCHOR; deepseek-v4-flash butuh max_tokens >= 1024 (reasoning); gpt-6-astra baru per 2026-09, chat+vision OK, BUKAN model reasoning"
+      "notes": "Butuh fingerprint header claude-cli; prompt non-Inggris butuh ENGLISH_ANCHOR; deepseek-v4-flash butuh max_tokens >= 1024 (reasoning); gpt-6-astra baru per 2026-09, chat+vision OK, BUKAN model reasoning; tes 2026-09-23: hanya deepseek-v4-flash hidup — opus-5/opus-4-8/astra 402 (budget pool habis), gpt-5.6-sol/glm-5.3 503 (no available channel)"
     },
     {
       "name": "Groq",
@@ -40,6 +40,16 @@
       "formats": ["openai_chat", "anthropic_messages", "openai_images", "openai_images_edits"],
       "models": ["sensenova-6.8-flash-lite", "sensenova-6.7-flash-lite", "sensenova-u1.5-lite", "sensenova-u1-fast"],
       "notes": "Chat multimodal via OpenAI/Anthropic; 6.7 kompatibilitas diarahkan ke 6.8; U1.5 Lite untuk generasi dan edit gambar; U1 Fast untuk infografis; image URL bersifat sementara"
+    },
+    {
+      "name": "HCNSec",
+      "slug": "hcnsec",
+      "url": "https://api.hcnsec.cn",
+      "free_quota": "free credit registrasi + check-in harian (sistem kredit, bukan unlimited)",
+      "status": "terbatas",
+      "formats": ["openai_chat"],
+      "models": ["DeepSeek-V4-Flash", "glm-5.3-flash", "Qwen3.8-27B", "Qwen3.8-Flash-Next", "sensenova-6.8-flash-lite"],
+      "notes": "Relay NewAPI公益 (Xinjiang Huancheng Cybersecurity); OpenAI-compatible tanpa fingerprint; model name case-sensitive; rate limit ketat (400 Throttling.RateQuota); sebagian model listed tapi 500 get_channel_failed; probe BazaarLink laporkan substitution — jangan utk data sensitif; tier free vs svip (glm-5.3/qwen3.7-plus butuh langganan); tes 2026-09-23: 5 model lolos, MiniMax-M3/step*/DeepSeek-V4-Pro/kimi-k3/auto gagal"
     }
   ]
 }

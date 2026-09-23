@@ -13,6 +13,14 @@ import argparse
 import os
 import sys
 
+# Force UTF-8 stdout di Windows — err upstream (mis. AgentRouter 503) bisa
+# berhuruf Cina & crash di cp1252 (UnicodeEncodeError).
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 import yaml
 from dotenv import load_dotenv
 

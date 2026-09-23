@@ -30,10 +30,11 @@ Kurasi provider LLM **gratis** (atau free credit) yang sudah **dites langsung**,
 
 | Provider | Kuota Gratis | Model | Format API | Status | Panduan |
 |---|---|---|---|---|---|
-| [AgentRouter](https://agentrouter.org/register?aff=8NFb) | credit $150-200 | claude-opus-5, claude-opus-4-8, gpt-5.6-sol, gpt-6-astra, glm-5.3, deepseek-v4-flash | Anthropic + OpenAI | ✅ Aktif | [📖 providers/agentrouter](providers/agentrouter/) |
+| [AgentRouter](https://agentrouter.org/register?aff=8NFb) | credit $150-200 | claude-opus-5, claude-opus-4-8, gpt-5.6-sol, gpt-6-astra, glm-5.3, deepseek-v4-flash | Anthropic + OpenAI | ⚠️ Terbatas (2026-09-23) | [📖 providers/agentrouter](providers/agentrouter/) |
 | [Groq](https://console.groq.com) | free tier (rate limit) | openai/gpt-oss-120b, openai/gpt-oss-20b, qwen/qwen3.6-27b, groq/compound-mini | OpenAI | ✅ Aktif | [📖 providers/groq](providers/groq/) |
 | [Poolside](https://poolside.ai) | free preview (terbatas waktu) | poolside/laguna-s-2.1, poolside/laguna-xs-2.1 | OpenAI | ✅ Aktif | [📖 providers/poolside](providers/poolside/) |
 | [SenseNova](https://www.sensenova.ai) | public beta (1.500 panggilan / 5 jam per model) | sensenova-6.8-flash-lite, sensenova-6.7-flash-lite, sensenova-u1.5-lite, sensenova-u1-fast | OpenAI + Anthropic + Images | ✅ Aktif | [📖 providers/sensenova](providers/sensenova/) |
+| [HCNSec](https://api.hcnsec.cn/sign-up?aff=Q7jj) | free credit registrasi + check-in harian | DeepSeek-V4-Flash, glm-5.3-flash, Qwen3.8-27B, Qwen3.8-Flash-Next, sensenova-6.8-flash-lite | OpenAI | ⚠️ Terbatas (relay) | [📖 providers/hcnsec](providers/hcnsec/) |
 
 > Kolom "Model" di atas hanya **contoh model chat teruji** (bukan daftar lengkap). Groq misalnya punya belasan model (termasuk whisper/guard). Untuk daftar **lengkap & terkini**, jalankan: `python run.py --provider <nama> --list-models` (fetch live dari API). Daftar model bisa berubah sewaktu-waktu — lihat [CHANGELOG.md](CHANGELOG.md).
 
@@ -94,7 +95,9 @@ free-llm-providers/
 │   ├── poolside.yaml
 │   ├── poolside/
 │   ├── sensenova.yaml
-│   └── sensenova/
+│   ├── sensenova/
+│   ├── hcnsec.yaml
+│   └── hcnsec/
 ├── integrations/           # Panduan pasang di tools coding
 ├── anchors/                # Anchor moderasi per tugas (YAML, bisa per-provider)
 ├── .github/workflows/      # CI: smoke test harian → badge README
@@ -125,9 +128,14 @@ free-llm-providers/
 
 Sebagian besar tautan AgentRouter di repo ini adalah **referral link**. Jika kamu mendaftar lewat link tersebut, penulis mendapat reward credit tambahan (dan kamu juga dapat bonus) — **tanpa biaya ekstra** untukmu.
 
-- Tautan referral: https://agentrouter.org/register?aff=8NFb
+- Tautan referral AgentRouter: https://agentrouter.org/register?aff=8NFb
 - Skema reward (per info resmi AgentRouter): undang teman → kamu dapat **$50**, teman juga dapat **$50**; reward ditransfer ke saldo akun lewat fitur *transfer*.
 - Tidak suka referral? Pakai link biasa: https://agentrouter.org/register
+
+Tautan pendaftaran HCNSec juga merupakan **referral link**:
+
+- Tautan referral HCNSec: https://api.hcnsec.cn/sign-up?aff=Q7jj
+- Tidak suka referral? Pakai link biasa: https://api.hcnsec.cn/sign-up
 
 ## Pencatatan Perkembangan
 

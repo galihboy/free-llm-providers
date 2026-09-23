@@ -1,0 +1,34 @@
+# HCNSec — gateway NewAPI "公益" (public-welfare), OpenAI-compatible
+# Docs: https://api.hcnsec.cn/free-api/
+# Model list: https://api.hcnsec.cn/free-api/models/
+name: HCNSec
+url: https://api.hcnsec.cn
+free_quota: "register free credit + harian check-in (kuota dinamis; klaim promo ~$4000)"
+status: terbatas  # tes 2026-09-23: rate limit ketat + sebagian model no-channel/404
+standalone_docs: providers/hcnsec/README.md
+
+formats:
+  # Format OpenAI Chat Completions — satu-satunya format yang diklaim & teruji
+  openai_chat:
+    base_url: https://api.hcnsec.cn/v1
+    endpoint: /chat/completions
+    key_env: HCNSEC_API_KEY
+    # Model free layer TERUJI lolos tes 2026-09-23 (case-sensitive; cek --list-models utk full)
+    models: [DeepSeek-V4-Flash, glm-5.3-flash, Qwen3.8-27B, Qwen3.8-Flash-Next, sensenova-6.8-flash-lite]
+    # extra_headers: tidak ada -> header standar saja
+    # moderation: tidak ada -> prompt dikirim apa adanya
+    list_models:
+      endpoint: /models
+      method: GET
+
+gotcha:
+  - "model name CASE-SENSITIVE: 'DeepSeek-V4-Flash' benar, 'deepseek-v4-flash' bisa 404/err"
+  - "model 'auto' = smart routing NewAPI (opsional, tidak dijamin stabil; tes 2026-09-23: 522)"
+  - "token group wajib 'auto'/free; salah group -> 403 permission / model tidak tercapai meski ada kuota"
+  - "tier: free layer vs svip (glm-5.3, qwen3.7-plus, MiniMax-M2.7) butuh langganan"
+  - "401 = key salah; 403 = group/scope; 400 Throttling.RateQuota = rate limit ketat (window bisa >90s, jangan spam tes); 500 get_channel_failed = model listed tapi channel group auto tidak ada; 404 openai_error = model upstream bermasalah"
+  - "relay NewAPI pihak ketiga: probe BazaarLink laporkan substitution model (identitas upstream tidak terjamin); jangan utk data sensitif/produksi"
+  - "kuota 'unlimited' di tutorial lama sudah berubah jadi sistem kredit; cek GET /api/usage/token"
+  - "model list & tier berubah sewaktu-waktu tanpa notice; andalkan --list-models"
+  - "IPv6 bisa hang dari Windows tertentu; formats/base.py & script standalone force IPv4"
+  - "tes 2026-09-23: LOLOS DeepSeek-V4-Flash/glm-5.3-flash/Qwen3.8-27B/Qwen3.8-Flash-Next/sensenova-6.8-flash-lite; GAGAL MiniMax-M3+step* (500 no channel), DeepSeek-V4-Pro (404), DeepSeek-V4.1-Flash (not supported), kimi-k3 (timeout 120s); rate limit muncul jika tes beruntun"

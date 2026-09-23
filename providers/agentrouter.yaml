@@ -3,7 +3,7 @@
 name: AgentRouter
 url: https://agentrouter.org
 free_quota: "credit awal $150-200"
-status: aktif
+status: terbatas  # tes 2026-09-23: 1/6 model hidup (402 kuota / 503 no channel)
 standalone_docs: providers/agentrouter/README.md
 
 formats:
@@ -54,9 +54,12 @@ formats:
 gotcha:
   - "401 'unauthorized client detected' = fingerprint header kurang, BUKAN key salah"
   - "403 = key valid tapi model tidak diizinkan untuk key tersebut"
+  - "402 'Budget pool quota has been exhausted' = kuota budget pool akun habis (per 2026-09-23: opus-5/opus-4-8/gpt-6-astra kena); pilih budget pool lain / minta admin naikkan limit di console"
+  - "503 '无可用渠道' (no available channel) = gateway New API tidak punya channel upstream utk model di group default (per 2026-09-23: gpt-5.6-sol & glm-5.3); gangguan sementara di sisi AgentRouter, BUKAN model dihapus"
   - "prompt non-Inggris -> 400 content-blocked; solusinya ENGLISH_ANCHOR"
   - "key lama (AGENTROUTER_API_KEY) bisa semua model di kedua endpoint; key baru hanya gpt-5.6-sol"
   - "model claude-opus-4-6/4-7 sudah dihapus per 2026-08-20"
   - "glm-5.3 & deepseek-v4-flash (baru per 2026-08-27): tersedia di kedua endpoint, tool calling OK, tanpa vision; deepseek-v4-flash adalah model reasoning"
   - "gpt-6-astra (baru per 2026-09): tersedia di kedua endpoint, chat+vision OK, tool calling OK, BUKAN model reasoning"
   - "deepseek-v4-flash = model reasoning: max_tokens kecil (mis. 32) -> jawaban kosong; pakai >= 1024"
+  - "err 503 bisa mengandung teks Cina; cetak error di Windows butuh stdout UTF-8 (run.py sudah reconfigure)"

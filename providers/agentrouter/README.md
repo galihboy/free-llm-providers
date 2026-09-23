@@ -1,6 +1,6 @@
 # AgentRouter 🆓
 
-> 🔄 Standalone script: sinkron dengan `formats/` per 2026-09-12
+> 🔄 Standalone script: sinkron dengan `formats/` per 2026-09-23
 > ℹ️ Provider ini juga tersedia via framework: `python run.py --provider agentrouter`
 
 **AgentRouter** (https://agentrouter.org/register?aff=8NFb) adalah router LLM gratis dengan credit awal **$150-200**. Unik karena mendukung **2 format API sekaligus**: Anthropic Messages dan OpenAI Chat Completions.
@@ -62,7 +62,10 @@ python chat_openai.py --list-models
    - `401` = fingerprint header kurang
    - `403` = key valid tapi model tidak diizinkan
    - `400 content-blocked` = prompt kena moderasi bahasa
+   - `402 Budget pool quota has been exhausted` = kuota budget pool akun habis; pilih budget pool lain / minta admin naikkan limit di console (bukan masalah key/fingerprint)
+   - `503 无可用渠道 (no available channel)` = gateway AgentRouter tidak punya channel upstream utk model tsb di group `default` — gangguan sementara sisi server, model belum tentu dihapus
 4. **Dua key**: key lama (`AGENTROUTER_API_KEY`) bisa semua model di kedua endpoint; key baru (`AGENTROUTER_API_KEY_OPENAI`) hanya `gpt-5.6-sol`.
+5. **Status ketersediaan dinamis** — daftar model di katalog/console bisa beda dengan yang bisa dipanggil realtime (resource pool per akun). Tes ulang 2026-09-23: hanya `deepseek-v4-flash` hidup; `claude-opus-5`/`claude-opus-4-8`/`gpt-6-astra` → 402 (kuota habis), `gpt-5.6-sol`/`glm-5.3` → 503 (no channel). Selalu cek `--list-models` + tes 1 prompt sebelum andalkan provider ini.
 
 ## Integrasi Tools Coding
 

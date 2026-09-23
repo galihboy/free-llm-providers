@@ -9,6 +9,8 @@ Status perkembangan proyek dan rencana ke depan. Untuk riwayat perubahan detail 
 | AgentRouter | ✅ | ✅ | ✅ 2026-08-20 | ✅ | 2 format (Anthropic + OpenAI) |
 | Groq | ✅ | ✅ | ✅ 2026-08-20 | — | contoh provider standar |
 | SenseNova | ✅ | ✅ 2026-09-09 | ✅ 2026-09-09 | ✅ | Chat OpenAI/Anthropic + generasi/edit gambar |
+| Poolside | ✅ | ✅ | ✅ 2026-09-23 | — | text-only; laguna-xs butuh max_tokens ≥1024 |
+| HCNSec | ✅ | ✅ 2026-09-23 | ⚠️ 2026-09-23 (5 model lolos; smoke OK) | — | relay NewAPI; rate limit ketat |
 
 ### Kandidat Berikutnya (dari koleksi tes sebelumnya)
 
