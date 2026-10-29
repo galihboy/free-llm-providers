@@ -3,6 +3,23 @@
 Semua perubahan penting pada proyek ini dicatat di sini.
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/), versi mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
+## [0.9.0] - 2026-10-29
+
+### Diubah
+- **AgentRouter**: audit ulang domain `ps.air-outer.com` terhadap `agentrouter.org`. Keduanya menampilkan katalog yang sama (`gpt-5.6-sol`, `gpt-6-astra`, `gpt-6.1-sol`) dan menerima `/v1/messages`; domain baru menjadi endpoint dokumentasi/konfigurasi utama.
+- **Model baru**: `gpt-6.1-sol` ditambahkan setelah teruji `200/OK` melalui Anthropic Messages dan OpenAI Responses.
+- **OpenAI Responses**: ditambahkan client framework `formats/openai_responses.py`. Uji `/v1/chat/completions` pada kedua domain menghasilkan HTTP 400 yang meminta `/v1/responses`, sehingga tidak lagi dipakai sebagai format AgentRouter aktif.
+- **Standalone dan integrasi**: `providers/agentrouter/chat_openai.py`, proxy lokal, Codex, OpenCode, VS Code Copilot, README, registry, dan roadmap disinkronkan dengan endpoint baru.
+- **Status**: AgentRouter tetap `TERBATAS`; tidak ada bukti saldo akun pulih atau semua model lama tersedia.
+
+### Hasil Tes (2026-10-29 WIB)
+- `/v1/models` pada kedua domain: tiga model GPT di atas; daftar model bukan bukti saldo atau keberhasilan inferensi.
+- Anthropic Messages: ketiga GPT merespons `200/OK` pada domain baru; `gpt-6-astra` dan `gpt-5.6-sol` juga `200/OK` pada domain lama. Satu uji `gpt-6.1-sol` di domain lama terkena HTTP 502 token-rate-limit.
+- OpenAI Responses: `gpt-6.1-sol` `200/completed` pada domain baru dan lama.
+- OpenAI Chat Completions: ketiga GPT `400` (route meminta Responses); Claude/GLM/DeepSeek `503 no available channel`.
+- Anthropic Messages: `claude-opus-5`, `claude-opus-4-8`, `glm-5.3`, dan `deepseek-v4-flash` tetap `503 no available channel`.
+- Tidak ada endpoint API terpublikasi yang dipakai untuk membaca saldo/budget; pemeriksaan credit top-up tetap memerlukan dashboard manual.
+
 ## [0.8.0] - 2026-09-23
 
 ### Ditambahkan

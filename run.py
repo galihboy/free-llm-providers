@@ -3,7 +3,7 @@
 Cuma butuh 1 provider? Baca providers/<nama>/README.md (lebih sederhana).
 
 Contoh:
-  python run.py --provider agentrouter --format openai_chat -m gpt-5.6-sol -p "jelaskan LLM"
+  python run.py --provider agentrouter --format openai_responses -m gpt-6.1-sol -p "jelaskan LLM"
   python run.py --provider agentrouter --format anthropic_messages -m claude-opus-5 -p "halo"
   python run.py --provider groq -p "hello"
   python run.py --provider agentrouter --list-models

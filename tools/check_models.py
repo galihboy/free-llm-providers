@@ -15,7 +15,7 @@ HEADERS = {
 
 # Cek model di endpoint OpenAI
 print('=== Endpoint OpenAI (/models) ===')
-r = requests.get('https://agentrouter.org/v1/models', headers=HEADERS, timeout=30)
+r = requests.get('https://ps.air-outer.com/v1/models', headers=HEADERS, timeout=30)
 print(f'HTTP {r.status_code}')
 if r.status_code == 200:
     models = r.json().get('data', [])
@@ -32,7 +32,7 @@ else:
 # Cek model di endpoint Anthropic
 print()
 print('=== Endpoint Anthropic (/v1/models) ===')
-r2 = requests.get('https://agentrouter.org/v1/models', headers=HEADERS, timeout=30)
+r2 = requests.get('https://ps.air-outer.com/v1/models', headers=HEADERS, timeout=30)
 print(f'HTTP {r2.status_code}')
 if r2.status_code == 200:
     models2 = r2.json().get('data', [])

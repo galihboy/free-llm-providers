@@ -9,7 +9,7 @@ MASALAH YANG DISELESAIKAN
       VS Code Copilot
         -> http://localhost:5099/v1/chat/completions   (format OpenAI)
              [proxy: konversi + fingerprint + anchor + sanitasi + retry]
-        -> https://agentrouter.org/v1/messages          (format Anthropic)
+        -> https://ps.air-outer.com/v1/messages         (format Anthropic)
 
   Empat hal yang proxy lakukan (tidak bisa dari sisi VS Code):
     1. Suntik fingerprint header (user-agent claude-cli, dll) -> hindari 401.
@@ -65,10 +65,10 @@ load_dotenv(dotenv_path=os.path.join(ROOT, ".env"))
 # ---------------------------------------------------------------------------
 CFG = {}          # config format anthropic_messages dari YAML
 PROVIDER_NAME = "agentrouter"
-ENDPOINT = "https://agentrouter.org/v1/messages"
+ENDPOINT = "https://ps.air-outer.com/v1/messages"
 API_KEY = ""
 ANCHOR_TEXT = ANCHORS["coding"]   # default: persona coding (sesuai tools coding)
-MODEL_FALLBACK = "claude-opus-4-8"
+MODEL_FALLBACK = "gpt-6.1-sol"
 MODELS_LIST = []
 
 app = Flask(__name__)
@@ -468,7 +468,7 @@ def main():
 
     ENDPOINT = fmt["base_url"].rstrip("/") + fmt.get("endpoint", "/v1/messages")
     MODELS_LIST = fmt.get("models", [])
-    MODEL_FALLBACK = MODELS_LIST[0] if MODELS_LIST else "claude-opus-4-8"
+    MODEL_FALLBACK = MODELS_LIST[0] if MODELS_LIST else "gpt-6.1-sol"
 
     # Pilih anchor: registry -> file lokal provider -> file global -> teks bebas
     anchor_dirs = [os.path.join(ROOT, "providers", args.provider, "anchors")]

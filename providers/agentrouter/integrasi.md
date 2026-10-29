@@ -6,11 +6,11 @@ AgentRouter mendukung 2 format, jadi cara pasangnya tergantung tool:
 |---|---|---|
 | VS Code GitHub Copilot | OpenAI (via **proxy lokal**) | `http://localhost:5099/v1` |
 | OpenCode | Anthropic atau OpenAI-compatible | sesuai format |
-| Claude Code | Anthropic | `https://agentrouter.org` (tanpa /v1) |
-| Codex | OpenAI Responses | `https://agentrouter.org/v1` |
-| Cursor | OpenAI | `https://agentrouter.org/v1` |
+| Claude Code | Anthropic | `https://ps.air-outer.com` (tanpa /v1) |
+| Codex | OpenAI Responses | `https://ps.air-outer.com/v1` |
+| Cursor | OpenAI Responses | `https://ps.air-outer.com/v1` |
 
-> Sumber: https://agentrouter.org/docs/ — jangan campur base URL Anthropic (tanpa `/v1`) dengan OpenAI (pakai `/v1`).
+> Sumber: https://ps.air-outer.com/docs/ — uji 2026-10-29 menunjukkan GPT menolak Chat Completions (400), tetapi menerima Responses dan Anthropic Messages.
 
 ## 1. VS Code GitHub Copilot
 
@@ -32,7 +32,7 @@ Lalu di Copilot Chat → **Manage Models** → **Add Model** → **Custom Endpoi
 - Group: `AgentRouter (Proxy)`, API Key: isi apa saja (key asli dibaca proxy dari `.env`)
 - API format: **OpenAI Chat Completions**
 - Base URL: `http://localhost:5099/v1`
-- Model ID: `claude-opus-5`, `claude-opus-4-8`, `gpt-5.6-sol`, `gpt-6-astra`, `glm-5.3`, atau `deepseek-v4-flash`
+- Model ID: `gpt-6.1-sol`, `gpt-6-astra`, atau `gpt-5.6-sol`
 
 ## 2. OpenCode
 
@@ -44,11 +44,11 @@ Buat `opencode.json` di project (pilih salah satu):
   "provider": {
     "agentrouter": {
       "npm": "@ai-sdk/anthropic",
-      "options": { "baseURL": "https://agentrouter.org" },
-      "models": { "claude-opus-5": { "name": "claude-opus-5" } }
+      "options": { "baseURL": "https://ps.air-outer.com" },
+      "models": { "gpt-6.1-sol": { "name": "gpt-6.1-sol" } }
     }
   },
-  "model": "agentrouter/claude-opus-5"
+  "model": "agentrouter/gpt-6.1-sol"
 }
 ```
 
@@ -58,11 +58,11 @@ Buat `opencode.json` di project (pilih salah satu):
   "provider": {
     "agentrouter": {
       "npm": "@ai-sdk/openai-compatible",
-      "options": { "baseURL": "https://agentrouter.org/v1" },
-      "models": { "gpt-5.6-sol": { "name": "gpt-5.6-sol" } }
+      "options": { "baseURL": "https://ps.air-outer.com/v1" },
+      "models": { "gpt-6.1-sol": { "name": "gpt-6.1-sol" } }
     }
   },
-  "model": "agentrouter/gpt-5.6-sol"
+  "model": "agentrouter/gpt-6.1-sol"
 }
 ```
 
@@ -73,8 +73,8 @@ Lalu: `opencode providers login --provider agentrouter` → masukkan API key.
 ```powershell
 # Windows PowerShell
 $env:ANTHROPIC_AUTH_TOKEN="API_KEY_KAMU"
-$env:ANTHROPIC_BASE_URL="https://agentrouter.org"
-$env:ANTHROPIC_MODEL="claude-opus-5"
+$env:ANTHROPIC_BASE_URL="https://ps.air-outer.com"
+$env:ANTHROPIC_MODEL="gpt-6.1-sol"
 claude
 ```
 
@@ -89,14 +89,14 @@ model_provider = "agentrouter"
 
 [model_providers.agentrouter]
 name = "AgentRouter"
-base_url = "https://agentrouter.org/v1"
+base_url = "https://ps.air-outer.com/v1"
 wire_api = "responses"
 experimental_bearer_token = "API_KEY_KAMU"
 ```
 
 ## 5. Cursor
 
-Settings → Models → isi **OpenAI API Key** dengan API key AgentRouter → aktifkan **Override OpenAI Base URL** → `https://agentrouter.org/v1`.
+Settings → Models → isi **OpenAI API Key** dengan API key AgentRouter → gunakan Responses API dan base URL `https://ps.air-outer.com/v1`.
 
 > ⚠️ Keterbatasan Cursor: user gratis hanya bisa mode `auto`, tidak bisa pilih model manual.
 > ⚠️ **Belum diverifikasi**: AgentRouter mem-fingerprint client (butuh header `claude-cli`). Jika Cursor mengirim user-agent miliknya sendiri, kemungkinan kena `401 unauthorized client` seperti VS Code Copilot — solusinya sama: pakai proxy lokal.

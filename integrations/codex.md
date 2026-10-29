@@ -17,7 +17,7 @@ model_provider = "agentrouter"
 
 [model_providers.agentrouter]
 name = "AgentRouter"
-base_url = "https://agentrouter.org/v1"
+base_url = "https://ps.air-outer.com/v1"
 wire_api = "responses"
 experimental_bearer_token = "API_KEY_KAMU"
 ```

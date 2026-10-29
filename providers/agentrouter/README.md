@@ -1,42 +1,41 @@
 # AgentRouter 🆓
 
-> 🔄 Standalone script: sinkron dengan `formats/` per 2026-09-23
+> 🔄 Standalone script: sinkron dengan `formats/` per 2026-10-29
 > ℹ️ Provider ini juga tersedia via framework: `python run.py --provider agentrouter`
 
-**AgentRouter** (https://agentrouter.org/register?aff=8NFb) adalah router LLM gratis dengan credit awal **$150-200**. Unik karena mendukung **2 format API sekaligus**: Anthropic Messages dan OpenAI Chat Completions.
+**AgentRouter** (https://ps.air-outer.com) adalah router LLM dengan free credit. Pada pengujian 2026-10-29, GPT tersedia melalui Anthropic Messages dan OpenAI Responses; Chat Completions tidak didukung untuk model GPT.
 
 ## Info Dasar
 
 | | |
 |---|---|
-| Website / Daftar | https://agentrouter.org/register?aff=8NFb |
-| Ambil API key | https://agentrouter.org/console/token |
+| Website / Daftar | https://ps.air-outer.com |
+| Ambil API key | dashboard Agent Router |
 | Kuota gratis | credit awal $150-200 |
-| Docs | https://agentrouter.org/docs/ |
+| Docs | https://ps.air-outer.com/docs/ |
 
 > 💡 **Referral disclosure**: tautan pendaftaran AgentRouter di dokumen ini adalah link afiliasi (referral). Jika kamu mendaftar lewat sana, penulis mendapat reward **$50** dan kamu juga dapat **$50** (tanpa biaya ekstra). Reward ditransfer ke saldo akun via fitur *transfer*. Mau netral? Pakai https://agentrouter.org/register.
 
-## Model Tersedia (per 2026-08-27)
+## Model Terlihat di Katalog (per 2026-10-29)
 
 | Model | Format | Vision | Tool Calling | Max Input | Max Output | Catatan |
 |---|---|---|---|---|---|---|
-| `claude-opus-5` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | |
-| `claude-opus-4-8` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | |
-| `gpt-5.6-sol` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | bisa lewat kedua endpoint |
-| `gpt-6-astra` | Anthropic + OpenAI | ✅ | ✅ | 1.000.000 | 128.000 | baru per 2026-09; chat+vision OK, tool calling OK, BUKAN model reasoning |
-| `glm-5.3` | Anthropic + OpenAI | ❌ | ✅ | 1.048.576 | 131.072 | baru per 2026-08-27 |
-| `deepseek-v4-flash` | Anthropic + OpenAI | ❌ | ✅ | 1.048.576 | 393.216 | baru per 2026-08-27; butuh `-t ≥1024` |
+| `gpt-6.1-sol` | Anthropic + Responses | belum diklaim | belum diklaim | belum diklaim | belum diklaim | baru; teruji 200/OK |
+| `gpt-6-astra` | Anthropic + Responses | belum diklaim | belum diklaim | belum diklaim | belum diklaim | teruji 200/OK |
+| `gpt-5.6-sol` | Anthropic + Responses | belum diklaim | belum diklaim | belum diklaim | belum diklaim | teruji 200/OK |
 
 > ⚠️ `claude-opus-4-6` dan `claude-opus-4-7` sudah **dihapus** dari AgentRouter.
 > ⚠️ `deepseek-v4-flash` adalah model reasoning: `max_tokens` kecil (mis. 32) membuat jawaban kosong karena token habis untuk reasoning — pakai `-t 1024` atau lebih.
 > ℹ️ Spek token/vision/tool-calling disinkronkan dari konfigurasi VS Code Copilot yang teruji (`chatLanguageModels.json`).
 
-## Dua Endpoint
+## Endpoint yang Teruji
 
 | Format | Base URL | Endpoint |
 |---|---|---|
-| Anthropic Messages | `https://agentrouter.org` | `/v1/messages` |
-| OpenAI Compatible | `https://agentrouter.org/v1` | `/chat/completions` |
+| Anthropic Messages | `https://ps.air-outer.com` | `/v1/messages` |
+| OpenAI Responses | `https://ps.air-outer.com/v1` | `/responses` |
+
+> `/v1/chat/completions` diuji pada kedua domain dan mengembalikan HTTP 400: model GPT meminta `/v1/responses`.
 
 ## Cara Pakai (Standalone)
 
@@ -45,10 +44,10 @@
 AGENTROUTER_API_KEY=sk-xxxxx
 
 # 2. Chat via format OpenAI (model GPT)
-python chat_openai.py -m gpt-5.6-sol -p "jelaskan LLM dalam 1 kalimat"
+python chat_openai.py -m gpt-6.1-sol -p "jelaskan LLM dalam 1 kalimat"
 
 # 3. Chat via format Anthropic (model Claude)
-python chat_anthropic.py -m claude-opus-5 -p "halo, apa kabar?"
+python chat_anthropic.py -m gpt-6.1-sol -p "halo, apa kabar?"
 
 # 4. List model
 python chat_openai.py --list-models
@@ -63,9 +62,10 @@ python chat_openai.py --list-models
    - `403` = key valid tapi model tidak diizinkan
    - `400 content-blocked` = prompt kena moderasi bahasa
    - `402 Budget pool quota has been exhausted` = kuota budget pool akun habis; pilih budget pool lain / minta admin naikkan limit di console (bukan masalah key/fingerprint)
-   - `503 无可用渠道 (no available channel)` = gateway AgentRouter tidak punya channel upstream utk model tsb di group `default` — gangguan sementara sisi server, model belum tentu dihapus
+   - `503 无可用渠道 (no available channel)` = gateway AgentRouter tidak punya channel upstream; pada 2026-10-29 terjadi pada Claude Opus 5/4-8, GLM 5.3, dan DeepSeek V4 Flash
+   - `400` pada `/v1/chat/completions` = model GPT meminta `/v1/responses`
 4. **Dua key**: key lama (`AGENTROUTER_API_KEY`) bisa semua model di kedua endpoint; key baru (`AGENTROUTER_API_KEY_OPENAI`) hanya `gpt-5.6-sol`.
-5. **Status ketersediaan dinamis** — daftar model di katalog/console bisa beda dengan yang bisa dipanggil realtime (resource pool per akun). Tes ulang 2026-09-23: hanya `deepseek-v4-flash` hidup; `claude-opus-5`/`claude-opus-4-8`/`gpt-6-astra` → 402 (kuota habis), `gpt-5.6-sol`/`glm-5.3` → 503 (no channel). Selalu cek `--list-models` + tes 1 prompt sebelum andalkan provider ini.
+5. **Status ketersediaan dinamis** — pada 2026-10-29 `/v1/models` hanya mengembalikan tiga GPT; ketiganya berhasil via `/v1/messages`, dan `gpt-6.1-sol` juga via `/v1/responses`. Klaim credit top-up tidak membuktikan saldo akun terisi.
 
 ## Integrasi Tools Coding
 

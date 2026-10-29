@@ -1,11 +1,11 @@
-"""[STANDALONE] Chat AgentRouter via OpenAI Compatible API.
+"""[STANDALONE] Chat AgentRouter via OpenAI Responses API.
 
 Bisa jalan sendiri: cukup file ini + .env berisi AGENTROUTER_API_KEY.
 Tidak butuh folder formats/ atau run.py.
 Versi terintegrasi (multi-provider): lihat /run.py
 
-Endpoint: POST https://agentrouter.org/v1/chat/completions
-Model:    gpt-5.6-sol, gpt-6-astra, glm-5.3, deepseek-v4-flash
+Endpoint: POST https://ps.air-outer.com/v1/responses
+Model:    gpt-6.1-sol, gpt-6-astra, gpt-5.6-sol
 
 GOTCHA:
   - Header user-agent "claude-cli/..." + x-stainless-* WAJIB, kalau tidak 401.
@@ -23,7 +23,7 @@ import time
 
 import requests
 
-BASE_URL = "https://agentrouter.org/v1"
+BASE_URL = "https://ps.air-outer.com/v1"
 
 ENGLISH_ANCHOR = (
     "You are an expert AI programming assistant working inside a code editor. "
@@ -87,15 +87,15 @@ def chat(api_key, model, prompt, max_tokens=512):
 
     start = time.time()
     resp = requests.post(
-        f"{BASE_URL}/chat/completions",
+        f"{BASE_URL}/responses",
         headers=build_headers(api_key),
         json={
             "model": model,
-            "max_tokens": max_tokens,
-            "messages": [
-                {"role": "user", "content": ENGLISH_ANCHOR},
-                {"role": "assistant", "content": "Understood. I will assist in the user's language."},
-                {"role": "user", "content": prompt},
+            "max_output_tokens": max_tokens,
+            "input": [
+                {"role": "user", "content": [{"type": "input_text", "text": ENGLISH_ANCHOR}]},
+                {"role": "assistant", "content": [{"type": "output_text", "text": "Understood. I will assist in the user's language."}]},
+                {"role": "user", "content": [{"type": "input_text", "text": prompt}]},
             ],
         },
         timeout=120,
@@ -109,13 +109,21 @@ def chat(api_key, model, prompt, max_tokens=512):
     data = resp.json()
     print("\nJawaban:")
     print("=" * 60)
-    print(data["choices"][0]["message"]["content"])
+    answer = data.get("output_text")
+    if not answer:
+        answer = "".join(
+            content.get("text", "")
+            for item in data.get("output", [])
+            for content in item.get("content", [])
+            if content.get("type") == "output_text"
+        )
+    print(answer or "(tidak ada teks)")
 
     usage = data.get("usage")
     if usage:
         print("\nUsage:")
-        print(f"  input_tokens     : {usage.get('prompt_tokens', '?')}")
-        print(f"  output_tokens    : {usage.get('completion_tokens', '?')}")
+        print(f"  input_tokens     : {usage.get('input_tokens', '?')}")
+        print(f"  output_tokens    : {usage.get('output_tokens', '?')}")
         print(f"  total_tokens     : {usage.get('total_tokens', '?')}")
     print(f"\nLatency: {latency_ms:.0f} ms")
 

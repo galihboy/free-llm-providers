@@ -1,18 +1,18 @@
-# AgentRouter — provider dengan 2 format API (Anthropic + OpenAI)
-# Docs: https://agentrouter.org/docs/
+# AgentRouter — provider dengan Anthropic Messages dan OpenAI Responses
+# Docs: https://ps.air-outer.com/docs/
 name: AgentRouter
-url: https://agentrouter.org
+url: https://ps.air-outer.com
 free_quota: "credit awal $150-200"
-status: terbatas  # tes 2026-09-23: 1/6 model hidup (402 kuota / 503 no channel)
+status: terbatas  # tes 2026-10-29: 3 model hidup via Responses/Anthropic; Chat 400/503
 standalone_docs: providers/agentrouter/README.md
 
 formats:
-  # Format Anthropic Messages — Claude + model lain (glm, deepseek)
+  # Format Anthropic Messages — format yang terbukti hidup pada 2026-10-29
   anthropic_messages:
-    base_url: https://agentrouter.org      # TANPA /v1
+    base_url: https://ps.air-outer.com      # TANPA /v1
     endpoint: /v1/messages
     key_env: AGENTROUTER_API_KEY
-    models: [claude-opus-4-8, claude-opus-5, gpt-5.6-sol, gpt-6-astra, glm-5.3, deepseek-v4-flash]
+    models: [gpt-6.1-sol, gpt-6-astra, gpt-5.6-sol]
     extra_headers:                          # fingerprint client WAJIB, kalau tidak 401
       user-agent: "claude-cli/2.1.195 (external, sdk-cli)"
       x-app: cli
@@ -32,14 +32,13 @@ formats:
       endpoint: /v1/models
       method: GET
 
-  # Format OpenAI Chat Completions — untuk model GPT
-  openai_chat:
-    base_url: https://agentrouter.org/v1
-    endpoint: /chat/completions
-    key_env: AGENTROUTER_API_KEY            # key lama bisa semua model
-    key_env_alt: AGENTROUTER_API_KEY_OPENAI # key baru hanya gpt-5.6-sol
-    models: [gpt-5.6-sol, gpt-6-astra, glm-5.3, deepseek-v4-flash]
-    extra_headers:                          # fingerprint client WAJIB juga di sini
+  # AgentRouter mengarahkan model GPT ke Responses API, bukan Chat Completions.
+  openai_responses:
+    base_url: https://ps.air-outer.com/v1
+    endpoint: /responses
+    key_env: AGENTROUTER_API_KEY
+    models: [gpt-6.1-sol, gpt-6-astra, gpt-5.6-sol]
+    extra_headers:
       user-agent: "claude-cli/2.1.195 (external, sdk-cli)"
       x-app: cli
       x-stainless-package-version: "0.0.0"
@@ -54,8 +53,9 @@ formats:
 gotcha:
   - "401 'unauthorized client detected' = fingerprint header kurang, BUKAN key salah"
   - "403 = key valid tapi model tidak diizinkan untuk key tersebut"
-  - "402 'Budget pool quota has been exhausted' = kuota budget pool akun habis (per 2026-09-23: opus-5/opus-4-8/gpt-6-astra kena); pilih budget pool lain / minta admin naikkan limit di console"
-  - "503 '无可用渠道' (no available channel) = gateway New API tidak punya channel upstream utk model di group default (per 2026-09-23: gpt-5.6-sol & glm-5.3); gangguan sementara di sisi AgentRouter, BUKAN model dihapus"
+  - "2026-10-29: /v1/models hanya mengembalikan gpt-5.6-sol, gpt-6-astra, gpt-6.1-sol; katalog bukan bukti request akan berhasil"
+  - "2026-10-29: model GPT tersebut HTTP 400 di /v1/chat/completions; gunakan /v1/responses atau /v1/messages"
+  - "503 '无可用渠道' (no available channel) = gateway tidak punya channel upstream; pada 2026-10-29 berlaku untuk claude-opus-5, claude-opus-4-8, glm-5.3, deepseek-v4-flash"
   - "prompt non-Inggris -> 400 content-blocked; solusinya ENGLISH_ANCHOR"
   - "key lama (AGENTROUTER_API_KEY) bisa semua model di kedua endpoint; key baru hanya gpt-5.6-sol"
   - "model claude-opus-4-6/4-7 sudah dihapus per 2026-08-20"

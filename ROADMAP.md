@@ -6,7 +6,7 @@ Status perkembangan proyek dan rencana ke depan. Untuk riwayat perubahan detail 
 
 | Provider | YAML | Standalone | Teruji | Integrasi | Catatan |
 |---|---|---|---|---|---|
-| AgentRouter | ✅ | ✅ | ✅ 2026-08-20 | ✅ | 2 format (Anthropic + OpenAI) |
+| AgentRouter | ✅ | ✅ | ⚠️ 2026-10-29 (3 GPT via Anthropic/Responses; 4 model 503) | ✅ | Terbatas; endpoint baru `ps.air-outer.com`, Chat Completions tidak didukung |
 | Groq | ✅ | ✅ | ✅ 2026-08-20 | — | contoh provider standar |
 | SenseNova | ✅ | ✅ 2026-09-09 | ✅ 2026-09-09 | ✅ | Chat OpenAI/Anthropic + generasi/edit gambar |
 | Poolside | ✅ | ✅ | ✅ 2026-09-23 | — | text-only; laguna-xs butuh max_tokens ≥1024 |

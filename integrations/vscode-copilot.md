@@ -44,7 +44,7 @@ Copilot mengirim request format OpenAI dengan header miliknya sendiri. AgentRout
 VS Code Copilot
   → http://localhost:5099/v1/chat/completions   (format OpenAI)
        [proxy: konversi + fingerprint + anchor + sanitasi + retry]
-  → https://agentrouter.org/v1/messages          (format Anthropic)
+  → https://ps.air-outer.com/v1/messages         (format Anthropic)
 ```
 
 ### Langkah
@@ -66,7 +66,7 @@ Lalu di VS Code, ada **2 cara** mendaftarkan model:
 2. Group name: `AgentRouter (Proxy)`, API Key: isi apa saja (key asli dibaca proxy dari `.env`).
 3. API format: **OpenAI Chat Completions**.
 4. Base URL: `http://localhost:5099/v1`
-5. Model ID: `claude-opus-5`, `claude-opus-4-8`, `gpt-5.6-sol`, `glm-5.3`, atau `deepseek-v4-flash`.
+5. Model ID: `gpt-6.1-sol`, `gpt-6-astra`, atau `gpt-5.6-sol`.
 6. Tes: kirim "hanya balas OK".
 
 #### Cara B: Edit `chatLanguageModels.json` langsung (semua model sekaligus)
@@ -81,20 +81,11 @@ File lokasi: `%APPDATA%\Code\User\chatLanguageModels.json` (Windows) atau `~/.co
   "apiType": "chat-completions",
   "models": [
     {
-      "id": "claude-opus-5",
-      "name": "AR claude-opus-5",
+      "id": "gpt-6.1-sol",
+      "name": "AR GPT-6.1 Sol",
       "url": "http://localhost:5099",
       "toolCalling": true,
-      "vision": true,
-      "maxInputTokens": 1000000,
-      "maxOutputTokens": 128000
-    },
-    {
-      "id": "claude-opus-4-8",
-      "name": "AR Claude Opus 4.8",
-      "url": "http://localhost:5099",
-      "toolCalling": true,
-      "vision": true,
+      "vision": false,
       "maxInputTokens": 1000000,
       "maxOutputTokens": 128000
     },
@@ -116,24 +107,6 @@ File lokasi: `%APPDATA%\Code\User\chatLanguageModels.json` (Windows) atau `~/.co
       "maxInputTokens": 1000000,
       "maxOutputTokens": 128000
     },
-    {
-      "id": "glm-5.3",
-      "name": "AR glm-5.3",
-      "url": "http://localhost:5099",
-      "toolCalling": true,
-      "vision": false,
-      "maxInputTokens": 1048576,
-      "maxOutputTokens": 131072
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "name": "AR deepseek-v4-flash",
-      "url": "http://localhost:5099",
-      "toolCalling": true,
-      "vision": false,
-      "maxInputTokens": 1048576,
-      "maxOutputTokens": 393216
-    }
   ]
 }
 ```

@@ -39,10 +39,10 @@ jobs:
       - name: Run smoke test
         # AgentRouter di-skip di CI: IP GitHub Actions runner diblokir WAF upstream
         # (Alibaba Cloud SG) -> respons kosong. Tes AgentRouter lokal saja.
-        # Lanjut meski ada FAIL (biar artifact tetap ke-upload & badge merah)
+        # Artifact tetap di-upload oleh langkah berikutnya meski smoke gagal.
         env:
           SMOKE_SKIP: agentrouter
-        run: python tools/smoke_test_all.py --prompt "say OK" || true
+        run: python tools/smoke_test_all.py --prompt "say OK"
 
       - name: Upload smoke_result.json
         if: always()

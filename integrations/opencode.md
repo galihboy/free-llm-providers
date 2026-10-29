@@ -21,11 +21,11 @@ curl -fsSL https://opencode.ai/install | bash
     "agentrouter": {
       "npm": "@ai-sdk/anthropic",
       "name": "AgentRouter (Anthropic)",
-      "options": { "baseURL": "https://agentrouter.org" },
-      "models": { "claude-opus-5": { "name": "claude-opus-5" } }
+      "options": { "baseURL": "https://ps.air-outer.com" },
+      "models": { "gpt-6.1-sol": { "name": "gpt-6.1-sol" } }
     }
   },
-  "model": "agentrouter/claude-opus-5"
+  "model": "agentrouter/gpt-6.1-sol"
 }
 ```
 

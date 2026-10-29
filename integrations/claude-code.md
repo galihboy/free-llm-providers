@@ -12,14 +12,14 @@ Claude Code memakai konfigurasi bergaya Anthropic via environment variables.
 ```powershell
 # Windows PowerShell
 $env:ANTHROPIC_AUTH_TOKEN="API_KEY_KAMU"
-$env:ANTHROPIC_BASE_URL="https://agentrouter.org"
+$env:ANTHROPIC_BASE_URL="https://ps.air-outer.com"
 $env:ANTHROPIC_MODEL="claude-opus-5"
 ```
 
 ```bash
 # macOS / Linux
 export ANTHROPIC_AUTH_TOKEN="API_KEY_KAMU"
-export ANTHROPIC_BASE_URL="https://agentrouter.org"
+export ANTHROPIC_BASE_URL="https://ps.air-outer.com"
 export ANTHROPIC_MODEL="claude-opus-5"
 ```
 

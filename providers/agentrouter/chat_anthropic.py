@@ -4,8 +4,8 @@ Bisa jalan sendiri: cukup file ini + .env berisi AGENTROUTER_API_KEY.
 Tidak butuh folder formats/ atau run.py.
 Versi terintegrasi (multi-provider): lihat /run.py
 
-Endpoint: POST https://agentrouter.org/v1/messages
-Model:    claude-opus-5, claude-opus-4-8, gpt-5.6-sol, gpt-6-astra, glm-5.3, deepseek-v4-flash
+Endpoint: POST https://ps.air-outer.com/v1/messages
+Model:    gpt-6.1-sol, gpt-6-astra, gpt-5.6-sol
 
 GOTCHA:
   - Header user-agent "claude-cli/..." + x-stainless-* WAJIB, kalau tidak 401.
@@ -23,7 +23,7 @@ import time
 
 import requests
 
-BASE_URL = "https://agentrouter.org"
+BASE_URL = "https://ps.air-outer.com"
 
 ENGLISH_ANCHOR = (
     "You are an expert AI programming assistant working inside a code editor. "

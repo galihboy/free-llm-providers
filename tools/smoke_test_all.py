@@ -25,8 +25,9 @@ except Exception:
 
 import yaml
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, ROOT)
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.environ.get("SMOKE_ROOT", REPO_ROOT)
+sys.path.insert(0, REPO_ROOT)
 
 from dotenv import load_dotenv
 
@@ -73,6 +74,11 @@ def smoke_one(provider_name, provider_cfg, fmt_name, fmt_cfg, prompt):
     }
 
 
+def exit_code_for_results(results):
+    """Return a failing process code iff at least one smoke result failed."""
+    return 1 if any(result.get("status") == "FAIL" for result in results) else 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="Smoke test semua provider")
     parser.add_argument("--prompt", default="say OK", help="Prompt tes pendek")
@@ -110,8 +116,13 @@ def main():
     out = os.path.join(ROOT, "smoke_result.json")
     with open(out, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
-    print(f"\nHasil disimpan ke: {out}")
+    counts = {status: sum(r["status"] == status for r in results) for status in ("OK", "FAIL", "SKIP")}
+    print(
+        f"\nHasil disimpan ke: {out}"
+        f"\nRingkasan: PASS={counts['OK']} FAIL={counts['FAIL']} SKIP={counts['SKIP']}"
+    )
+    return exit_code_for_results(results)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
